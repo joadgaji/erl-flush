@@ -1,0 +1,5 @@
+#En esta página se llevará el registro de lo que se hace en cada sesión.
+
+= Bitácora =
+|| *Fecha* || *Duración* || *Personas presentes * || *Dificultades afrontadas* || *Resultado obtenidos* ||
+|| 12-Ago-2008 || 1 hr || Adrian, Malto(Manuel), Fumanchu (persona presente espiritual) || No se encontraban convenciones de Erlang. Dificultades para elegir la licencia (nada grave) || Creación del proyecto en google code. Elección de la licencia que llevará el proyecto. Determinación del lenguaje (Erlang) y sus convenciones||
