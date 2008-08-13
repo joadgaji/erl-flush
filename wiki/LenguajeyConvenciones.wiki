@@ -3,14 +3,19 @@
 
 = Lenguaje y Convenciones =
 
-Nuestro proyecto será programado en el lenguaje funcional Erlang. Pero para poder realizar este proyecto primero tenemos que saber las convenciones que tenemos que respetar.
+Nuestro proyecto será programado en el lenguaje funcional Erlang. Para poder realizar este proyecto primero tenemos que saber las convenciones que tenemos que respetar.
 Las convenciones de este y cualquier lenguaje son muy grandes por lo que enlistaremos las convenciones que creemos más importantes. 
+
 Las palabras reservadas en este lenguaje son :  after, and, andalso, band, begin, bnot, bor, bsl, bsr, bxor, case, catch, cond, div, end, fun, if, let, not, of, or, orelse, query, receive, rem, try, when, xor.
-Una secuecia puede estar formado por uno o más elementos. Por ejemplo las clausulas consisten en una secuencia de expresiones. Esto quiere decir que al menos debe de haber una expresión.
-Por otro lado una lista es cualquier número de elementos. Esto quiere decir que puede tener cero, uno o más elementos.
+
+Una secuecia puede estar formado por uno o más elementos. Por ejemplo, las clausulas consisten en una secuencia de expresiones. Esto quiere decir que al menos debe de haber una expresión.Por otro lado una lista es cualquier número de elementos. Esto quiere decir que puede tener cero, uno o más elementos.
+
 Todo el código de Erlang está dividido en modulos (modules).  Un módulo consiste en una secuencia de atributos y declaración de funciones. Cada módulo debe de terminar con un punto (.).
+
 Una declaración de funciones es una secuencia de function clauses separadas por punto y coma (;) y terminadas por un punto (.).
 Una function clause consiste de una expresión head y de una expresión para el cuerpo separadas por ->.
+
 Una expresión head consiste del nombre de una función, una lista de argumentos y un secuancia de guards opcional, con la palabra clave when.
 El número de argumentos N es la cardinalidad de la función.  Una función es única definida por el nombre del modulo, el nombre de la función y la cardinalidad. Esto es, dos funciones con el mismo nombre, el mismo módulo pero con diferente cardinalidad son dos funciones completamente diferentes.
+
 El cuerpo de la función consiste de una secuencia de expresiones separadas por una coma (,).
