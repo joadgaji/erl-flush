@@ -1,10 +1,14 @@
-pruebas : lexer.beam  parser.beam test_lexer1.beam test_parser1.beam
+pruebas : lexer1.beam lexer2N.beam parser1.beam test_lexer1.beam test_parser1.beam
 	erl -noshell -s test_lexer1 test -s init stop
+	erl -noshell -s test_parser1 test -s init stop
 	
-lexer.beam : lexer1.erl
+lexer1.beam : lexer1.erl
 	erlc lexer1.erl
 
-parser.beam : parser1.erl
+lexer2N.beam : lexer2N.erl
+	erlc lexer2N.erl
+
+parser1.beam : parser1.erl
 	erlc parser1.erl
 
 subdirs :

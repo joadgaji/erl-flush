@@ -2,9 +2,11 @@
 -export([inicio/1]).
 
 inicio(Input) ->
-	{ok, S} = file:read_file(Input),
-	L = binary_to_list(S),
-	stateA(lists:append(L, "$$"), 1, 1, []).
+	case file:read_file(Input) of
+		{ok, S} -> L = binary_to_list(S),
+			stateA(lists:append(L, "$$"), 1, 1, []);
+		{error, _} -> stateA(lists:append(Input, "$$"), 1, 1, [])
+	end.
 
 stateA([H1, H2|T], Ren, Col, Result)->
 	if
@@ -73,11 +75,12 @@ stateI([H1,H2|T], Ren, Col, Result, Partial, R, C, Type)->
 	if
 		(Type == expresion) and (H1 == $}) -> stateA(T, Ren, Col + 2, [{Type, R, C, lists:reverse([H2,H1|Partial])}|Result]);
 		(Type == enunciado) and (H1 == $%) -> stateA(T, Ren, Col + 2, [{Type, R, C,lists:reverse([H2,H1|Partial])}|Result]);
-		(Type == comment) and (H1 == $#) -> stateA(T, Ren, Col + 2, [{Type, R, C, lists:reverse([H2,H1|Partial])}|Result]);
+		%(Type == comment) and (H1 == $#) -> stateA(T, Ren, Col + 2, [{Type, R, C, lists:reverse([H2,H1|Partial])}|Result]);
 		(H1 == $$) and (H2 == $$) -> stateA([H1, H2|T], Ren, Col + 2, [{Type, R, C, lists:reverse(Partial)}|Result]);
 		(H1 == ${) and (H2 == ${) -> stateA([H1,H2|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result]);
-		(H1 == ${) and (H2 == $%) -> stateA([H1,H2|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result])
+		(H1 == ${) and (H2 == $%) -> stateA([H1,H2|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result]);
 		%(H1 == ${) and (H2 == $#) -> stateA([H1,H2|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result])
+		true -> throw(invalidsyntax)
 	end.
 
 stateJ([H1,H2|T], Ren, Col, Result, Partial, R, C, Type)->
