@@ -1,6 +1,11 @@
 -module(test_lexer2N).
 -import(lexer2N, [inicio/1]).
+
+-ifdef(windows) .
+-include_lib("eunt/include/eunit.hrl").
+-else.
 -include_lib("eunit/include/eunit.hrl").
+-endif.
 
 inicio_vacio_test_() ->
 [?_assert(inicio({expresion,11,6,"{{ }}"}) == [])].

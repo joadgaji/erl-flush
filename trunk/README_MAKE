@@ -1,0 +1,9 @@
+Probras las puebas de unidad.
+
+Para la version de Kubuntu solo se necesita hacer
+make
+en el directorio raíz del proyecto
+
+Para la versión de windows se necesita poner:
+make "WIN = -Dwindows"
+en el directorio raíz del proyecto

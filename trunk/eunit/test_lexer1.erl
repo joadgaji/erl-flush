@@ -1,6 +1,11 @@
 -module(test_lexer1).
--include_lib("eunit/include/eunit.hrl").
 -import(lexer1, [inicio/1]).
+
+-ifdef(windows) .
+-include_lib("eunt/include/eunit.hrl").
+-else.
+-include_lib("eunit/include/eunit.hrl").
+-endif.
 
 inicio_test_() ->
     [?_assert(inicio("eunit/test_lexer1.html") == [
