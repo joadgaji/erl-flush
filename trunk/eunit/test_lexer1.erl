@@ -2,7 +2,7 @@
 -import(lexer1, [inicio/1]).
 
 -ifdef(windows) .
--include_lib("eunt/include/eunit.hrl").
+-include_lib("C:/tools/eunit/include/eunit.hrl").
 -else.
 -include_lib("eunit/include/eunit.hrl").
 -endif.

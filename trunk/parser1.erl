@@ -8,7 +8,8 @@ inicio(Input) ->
 		{error,_} -> stateA(lists:append(Input, "$$"), [])
 	end.
 
-%% Los espacios estan representados con $_ donde _ es el espacio
+%% Estado que busca  donde abren los comentarios o sino va concatenando el contenido
+%% que no es comentario de nuestro framework.
 stateA([H1, H2|T], Result)->
 	if
 		(H1 == ${) and (H2 == $#)	->stateB(T, [32, 32|Result]); 
@@ -19,6 +20,8 @@ stateA([H1, H2|T], Result)->
 		true -> stateA([H2|T], [H1|Result])
 	end.
 	
+%% Estado que sustituye por estapacion y saltos de línea todo lo que está adentro
+%% del comentario. Busca posibles errores
 stateB([H1,H2|T], Result)->
 	if
 		(H1 == $#) and (H2 == $})	-> stateA(T, [32,32|Result]);

@@ -9,83 +9,80 @@
 -define(IS_SPACE(X), ((X) == $ )).
 -define(IS_SYMBOL(X), ((X) == $+)or ((X) == $-) or ((X) == $*) or ((X) == $/) or ((X) == $=) or ((X) == $%) or ((X) == 40) or ((X) == 41)).
 
-inicio({_,Ren,Col,[_,_|T]})-> stateA(T,Ren,Col+2,[]).
+inicio({_,Ren,Col,[_,_|T]})-> stateA(T,Ren,Col+2,[], 0).
 
-stateA([H|T],Ren,Col,Result)->
+%% Escoge entre los diferentes caractéres posibles
+stateA([H|T],Ren,Col,Result, Stk)->
 	if
-		?IS_SPACE(H)	-> stateA(T, Ren, Col + 1, Result);
-		(H == $') 		-> stateB(T, Ren, Col + 1, Result, [H], Ren, Col);
-		(H == $")		-> stateC(T, Ren, Col + 1, Result, [H], Ren, Col);
-		?IS_DIGIT(H)    -> stateD(T, Ren, Col + 1, Result, [H], Ren, Col);
-		(H == $.)		-> stateE(T, Ren, Col + 1, Result, [H], Ren, Col);
-		?IS_SYMBOL(H) 	-> stateF(T, Ren, Col + 1, Result, [H], Ren, Col);
-		?IS_LOWER(H)    -> stateH(T, Ren, Col + 1, Result, [H], Ren, Col);
-		(H == $})		-> stateK( [H|T],Result);
+		?IS_SPACE(H)	-> stateA(T, Ren, Col + 1, Result, Stk);
+		(H == $') 		-> stateB(T, Ren, Col + 1, Result, Stk, [H], Ren, Col);
+		(H == $")		-> stateC(T, Ren, Col + 1, Result, Stk, [H], Ren, Col);
+		?IS_DIGIT(H)    -> stateD(T, Ren, Col + 1, Result, Stk, [H], Ren, Col);
+		(H == $.)		-> stateE(T, Ren, Col + 1, Result, Stk, [H], Ren, Col);
+		?IS_SYMBOL(H) 	-> stateF([H|T], Ren, Col, Result, Stk, Ren, Col);
+		?IS_LOWER(H)    -> stateH(T, Ren, Col + 1, Result, Stk, [H], Ren, Col);
+		(H == $}) 		-> stateK( [H|T],Result, Stk);
 		true 			-> throw(invalidsyntax)
 	end.
-
-stateB([H|T],Ren,Col,Result,Partial,R,C)->
+	
+%% Revisa una cadena de string con comilla sencilla
+stateB([H|T],Ren,Col,Result, Stk, Partial,R,C)->
 	if 
-		(H == $') 	-> stateI([H|T], Ren, Col, Result, Partial, R, C, cadena);
-		true		-> stateB(T, Ren, Col + 1, Result, [H|Partial], R, C)
+		(H == $') 	-> stateI(T, Ren, Col + 1, Result, Stk, [H|Partial], R, C, cadena);
+		true		-> stateB(T, Ren, Col + 1, Result, Stk, [H|Partial], R, C)
 	end.
 	
-
-stateC([H|T],Ren,Col,Result,Partial,R,C)->
+%% Revisa una cadena de string con comilla dolbe
+stateC([H|T],Ren,Col,Result, Stk, Partial,R,C)->
 	if 
-		(H == $") 	-> stateI([H|T], Ren, Col, Result, Partial, R, C, cadena);
-		true		-> stateC(T, Ren, Col + 1, Result, [H|Partial], R, C)
+		(H == $") 	-> stateI([H|T], Ren, Col, Result, Stk, Partial, R, C, cadena);
+		true		-> stateC(T, Ren, Col + 1, Result, Stk, [H|Partial], R, C)
 	end.
 	
-stateD([H|T],Ren,Col,Result,Partial,R,C)->
+%% Reivsa un número entero y un foltante
+stateD([H|T],Ren,Col,Result, Stk, Partial,R,C)->
 	if 
-		?IS_DIGIT(H) 					-> stateD(T, Ren, Col+1, Result,[H|Partial], R, C);
-		(H == $.)       				-> stateE(T, Ren, Col+1, Result,[H|Partial], R, C);					
+		?IS_DIGIT(H) 					-> stateD(T, Ren, Col+1, Result, Stk, [H|Partial], R, C);
+		(H == $.)       				-> stateE(T, Ren, Col+1, Result, Stk, [H|Partial], R, C);					
 		?IS_SYMBOL(H) or ?IS_SPACE(H) 
-		or (H == $})					-> stateI([H|T], Ren, Col, Result, Partial, R, C, entero);
+		or (H == $})					-> stateI([H|T], Ren, Col, Result, Stk, Partial, R, C, entero);
 		true							-> throw(invalidsyntax)
 	end.
 
-stateE([H|T],Ren,Col,Result,Partial,R,C)->
+%% Concatena un número flotante
+stateE([H|T],Ren,Col,Result,Stk, Partial,R,C)->
 	if 
-		?IS_DIGIT(H) 					-> stateE(T, Ren, Col+1, Result,[H|Partial], R, C);
-		(H == $})						-> stateK([H|T], Result);
-		?IS_SYMBOL(H) or ?IS_SPACE(H) 	-> stateI([H|T], Ren, Col, Result, Partial, R, C, float);
+		?IS_DIGIT(H) 					-> stateE(T, Ren, Col+1, Result, Stk, [H|Partial], R, C);
+		(H == $}) or					%%	-> stateK([H|T], Result);
+		?IS_SYMBOL(H) or ?IS_SPACE(H) 	-> stateI([H|T], Ren, Col, Result, Stk, Partial, R, C, float);
 		true							-> throw(invalidsyntax)
 	end.
 
-stateF([H|T],Ren,Col,Result,Partial,R,C)->
+%% Revisa caractéres, Incrementa y decrementa el stack de paréntesis
+stateF([H|T],Ren,Col,Result,Stk,R,C)->
 	if 
-		?IS_DIGIT(H) or	?IS_SPACE(H) or 
-		?IS_SYMBOL(H) or ?IS_LOWER(H) or (H == $.)	-> stateI([H|T], Ren, Col, Result, Partial, R, C, simbolo);      			
-		(H == $})									-> stateK([H|T],Result);
-		true										-> throw(invalidsyntax)
+		(H == 40)	-> stateI(T, Ren, Col+ 1, Result, Stk + 1, [H], R, C, simbolo); 
+		(H == 41)	-> stateI(T, Ren, Col+ 1, Result, Stk - 1, [H], R, C, simbolo); 
+		true			-> stateI(T, Ren, Col+ 1, Result, Stk, [H], R, C, simbolo)
 	end.
 
-stateH([H|T],Ren,Col,Result,Partial,R,C)->
+%% Concatena identificadores
+stateH([H|T],Ren,Col,Result, Stk, Partial,R,C)->
 	if 
-		?IS_DIGIT(H) or	?IS_LETTER(H) or (H ==$_) -> stateH(T, Ren, Col, Result,[H|Partial], R, C);      			
-		?IS_SPACE(H) or ?IS_SYMBOL(H)			  -> stateI([H|T], Ren, Col, Result, Partial, R, C, identificador);    
-		(H == $})								  -> stateK([H|T],Result);
+		?IS_DIGIT(H) or	?IS_LETTER(H) or (H ==$_) -> stateH(T, Ren, Col + 1, Result,Stk, [H|Partial], R, C);      			
+		?IS_SPACE(H) or ?IS_SYMBOL(H) or
+		(H == $})								  -> stateI([H|T], Ren, Col, Result, Stk, Partial, R, C, identificador);    
 		true									  -> throw(invalidsyntax)
 	end.
 
+%% Tolo de que esté es partial lo concatena a el resultado final
+stateI([H|T], Ren, Col, Result, Stk, Partial, R, C, Type)->
+		 stateA([H|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result], Stk).
 
-stateI([H|T], Ren, Col, Result, Partial, R, C, Type)->
-		if
-		
-		
-		(H == $") or (H == $')  -> stateA(T, Ren, Col + 1, [{Type, R, C, lists:reverse([H|Partial])}|Result]);	
-		(H == 41)  				-> stateA([H|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result]);
-		(H == $})				-> stateK([H|T],[{Type, R, C, lists:reverse(Partial)}|Result]);
-		true				   	-> stateA([H|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result])
-		end.
-
-
-stateK([H|_],Result)->
+%% Estado que revida el stack antes de terminar
+stateK([H|_],Result, Stk)->
 	if 
-		
-		(H == $}) 	->lists:reverse(Result);
+		(H == $}) and (Stk == 0)	->lists:reverse(Result);
 		true 		-> throw(invalidsyntax)
 	end.
 
