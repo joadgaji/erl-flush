@@ -14,10 +14,16 @@ inicio_test_() ->
 		{enunciado,7,3,"{%  \"hola1\" + 'hola2' / \"ho\n\t\tla3\" = \"ho\\nla4\"%}"},
 		{estatico,8,21," \n\t\t"},
 		{expresion,9,3,"{{\"ho'la'5\" % 'ho\n\t\tla6' - 'ho\"la\"7'}}"},
-		{estatico,10,21,"\n\t</body>\n</html>\n\n"}]),
-	?_assert(inicio("{{ '{{' }}") == [{expresion,1,1,"{{ '{{' }}"}]),
-	?_assert(inicio("{% '%}' %}") == [{enunciado,1,1,"{% '%}' %}"}]),
-	?_assertThrow(invalidsyntax, inicio("{% {{ }} %}")),
-	?_assertThrow(invalidsyntax, inicio("{{ {% %} }}")),
-	?_assert(inicio("{{ \"\n\" }}") /= [{expresion,1,1,"{{ \"
+		{estatico,10,21,"\n\t</body>\n</html>\n\n"}])].
+		
+inicio_especiales_test_() ->
+	[?_assert(inicio("{{ '{{' }}") == [{expresion,1,1,"{{ '{{' }}"}]),
+	?_assert(inicio("{% '%}' %}") == [{enunciado,1,1,"{% '%}' %}"}])].
+	
+inicio_excepciones_test_() ->
+	[?_assertThrow(invalidsyntax, inicio("{% {{ }} %}")),
+	?_assertThrow(invalidsyntax, inicio("{{ {% %} }}"))].
+	
+inicio_nueva_linea_test_() ->
+	[?_assert(inicio("{{ \"\n\" }}") /= [{expresion,1,1,"{{ \"
 	\" }}"}])].
