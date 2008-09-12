@@ -20,8 +20,8 @@ stateA([H|T],Ren,Col,Result)->
 		(H == $.)		-> stateE(T, Ren, Col + 1, Result, [H], Ren, Col);
 		?IS_SYMBOL(H) 	-> stateF(T, Ren, Col + 1, Result, [H], Ren, Col);
 		?IS_LOWER(H)    -> stateH(T, Ren, Col + 1, Result, [H], Ren, Col);
-		(H == $})		-> stateK(T, Ren, Col + 1, Result, [H], Ren, Col);
-		true 			-> stateJ(T, Ren, Col + 1, Result, [H], Ren, Col)
+		(H == $})		-> stateK( [H|T],Result);
+		true 			-> throw(invalidsyntax)
 	end.
 
 stateB([H|T],Ren,Col,Result,Partial,R,C)->
@@ -40,53 +40,52 @@ stateC([H|T],Ren,Col,Result,Partial,R,C)->
 stateD([H|T],Ren,Col,Result,Partial,R,C)->
 	if 
 		?IS_DIGIT(H) 					-> stateD(T, Ren, Col+1, Result,[H|Partial], R, C);
-		(H == $.)       				-> stateE(T, Ren, Col+1, Result,[H|Partial], R, C);
-								
-		?IS_SYMBOL(H) or ?IS_SPACE(H) or (H == $})	-> stateI([H|T], Ren, Col, Result, Partial, R, C, entero);
-		true							-> stateJ(T, Ren, Col + 1, Result, [H|Partial], R, C)
+		(H == $.)       				-> stateE(T, Ren, Col+1, Result,[H|Partial], R, C);					
+		?IS_SYMBOL(H) or ?IS_SPACE(H) 
+		or (H == $})					-> stateI([H|T], Ren, Col, Result, Partial, R, C, entero);
+		true							-> throw(invalidsyntax)
 	end.
 
 stateE([H|T],Ren,Col,Result,Partial,R,C)->
 	if 
 		?IS_DIGIT(H) 					-> stateE(T, Ren, Col+1, Result,[H|Partial], R, C);
-		(H == $})						-> stateK(T, Ren, Col + 1, Result, [H], Ren, Col);
+		(H == $})						-> stateK([H|T], Result);
 		?IS_SYMBOL(H) or ?IS_SPACE(H) 	-> stateI([H|T], Ren, Col, Result, Partial, R, C, float);
-		true							-> stateJ(T, Ren, Col + 1, Result, [H|Partial], R, C)
+		true							-> throw(invalidsyntax)
 	end.
 
 stateF([H|T],Ren,Col,Result,Partial,R,C)->
 	if 
 		?IS_DIGIT(H) or	?IS_SPACE(H) or 
 		?IS_SYMBOL(H) or ?IS_LOWER(H) or (H == $.)	-> stateI([H|T], Ren, Col, Result, Partial, R, C, simbolo);      			
-		(H == $})								-> stateK(T, Ren, Col + 1, Result, [H], Ren, Col);
-		true									-> stateJ(T, Ren, Col + 1, Result, [H|Partial], R, C)
+		(H == $})									-> stateK([H|T],Result);
+		true										-> throw(invalidsyntax)
 	end.
 
 stateH([H|T],Ren,Col,Result,Partial,R,C)->
 	if 
 		?IS_DIGIT(H) or	?IS_LETTER(H) or (H ==$_) -> stateH(T, Ren, Col, Result,[H|Partial], R, C);      			
 		?IS_SPACE(H) or ?IS_SYMBOL(H)			  -> stateI([H|T], Ren, Col, Result, Partial, R, C, identificador);    
-		(H == $})								  -> stateK(T, Ren, Col + 1, Result, [H], Ren, Col);
-		true									  -> stateJ(T, Ren, Col + 1, Result, [H|Partial], R, C)
+		(H == $})								  -> stateK([H|T],Result);
+		true									  -> throw(invalidsyntax)
 	end.
 
 
 stateI([H|T], Ren, Col, Result, Partial, R, C, Type)->
 		if
 		
+		
 		(H == $") or (H == $')  -> stateA(T, Ren, Col + 1, [{Type, R, C, lists:reverse([H|Partial])}|Result]);	
 		(H == 41)  				-> stateA([H|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result]);
-		(H == $})				-> stateK(T, Ren, Col + 1, [{Type, R, C, lists:reverse(Partial)}|Result], [H], Ren, Col);
-		true				   -> stateA([H|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result])
+		(H == $})				-> stateK([H|T],[{Type, R, C, lists:reverse(Partial)}|Result]);
+		true				   	-> stateA([H|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result])
 		end.
 
-%% Error en la expresion
-stateJ(_,_,_,_,_,_,_)->0.
 
-stateK([H|T],Ren,Col,Result,Partial,R,C)->
+stateK([H|_],Result)->
 	if 
 		
 		(H == $}) 	->lists:reverse(Result);
-		true 		-> stateJ(T, Ren, Col , Result, [H|Partial], R, C)
+		true 		-> throw(invalidsyntax)
 	end.
 
