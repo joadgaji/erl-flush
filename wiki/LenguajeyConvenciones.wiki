@@ -20,7 +20,7 @@ El número de argumentos N es la cardinalidad de la función.  Una función es �
 
 El cuerpo de la función consiste de una secuencia de expresiones separadas por una coma (,).
 
-CONVENCIONES
+= CONVENCIONES =
 
 String con comillas simples.
 
@@ -38,8 +38,6 @@ Las variables no definidas no se imprimen.
 Si la variable no está definida es NULL, numérico=0, Booleano=Falso.
 
 Notación infija.
-
-
 
 
 
