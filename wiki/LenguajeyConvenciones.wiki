@@ -19,3 +19,30 @@ Una expresión head consiste del nombre de una función, una lista de argumentos
 El número de argumentos N es la cardinalidad de la función.  Una función es única definida por el nombre del modulo, el nombre de la función y la cardinalidad. Esto es, dos funciones con el mismo nombre, el mismo módulo pero con diferente cardinalidad son dos funciones completamente diferentes.
 
 El cuerpo de la función consiste de una secuencia de expresiones separadas por una coma (,).
+
+CONVENCIONES
+
+String con comillas simples.
+
+Palabras reservadas:
+•	OR
+•	AND
+•	XOR
+•	NOT
+
+Nota: Solo se aceptan las palabras reservadas y (==, >, <, !=)si tienen paréntesis, ejemplo:
+(1+1) or (2+2)
+
+Las variables no definidas no se imprimen.
+
+Si la variable no está definida es NULL, numérico=0, Booleano=Falso.
+
+Notación infija.
+
+
+
+
+
+
+
+
