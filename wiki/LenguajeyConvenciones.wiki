@@ -39,8 +39,42 @@ Si la variable no está definida es NULL, numérico=0, Booleano=Falso.
 
 Notación infija.
 
+==Relacionales==
+
+'hola' < 'casa'
+'hola' == 'hola'
+'casa' != 'hola'
+ 1 < 2
+
+==Logicas==
+
+3.2 or 5
 
 
+E -> E '+' T
+E -> E '-' T
+E -> T
+T -> T '*' F
+T -> T '/' F
+T -> T '%' F
+T -> F
+F -> '(' E ')'
+F -> '-' F
+F -> num
 
 
+== Terminales ==
 
+> , < , == , != , indicador, num
+
+
+E -> T > T
+E -> T < T
+E -> T == T
+E -> T != T
+E -> T >= T
+E -> T =< T
+T -> '(' E ')'
+T -> indicador
+T -> numero
+T -> string
