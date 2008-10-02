@@ -82,6 +82,8 @@ E -> E '+' T
 
 E -> E '-' T
 
+E -> E and T
+
 E -> T
 
 T -> T '{{{*}}}' F
@@ -90,14 +92,19 @@ T -> T '/' F
 
 T -> T '%' F
 
+T -> T or F
+
+T -> T xor F
+
 T -> F
 
-F -> '(' E ')'
+F -> '(' B ')'
 
 F -> '-' F
 
-F -> num
+F -> not F
 
+F -> num
 
 == Terminales ==
 
