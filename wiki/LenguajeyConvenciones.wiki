@@ -55,7 +55,7 @@ Operators Associativity
 
 ++, - - Right associative
 
-==, /=, =<, <, >=, >, =:=, =/=
+{{{==}}}, /=, =<, <, >=, >, =:=, =/=
 
 andalso
 
