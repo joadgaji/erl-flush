@@ -49,9 +49,9 @@ Operators Associativity
 
 (unary) +, (unary) -, bnot, not
 
-/, {{{*}}}, div, rem, band, and Left associative
+/, {{{*}}}, div, rem, band, and                     Left associative
 
-+, -, bor, bxor, bsl, bsr, or, xor Left associative
++, -, bor, bxor, bsl, bsr, or, xor                  Left associative
 
 ++, - - Right associative
 
