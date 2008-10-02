@@ -49,7 +49,7 @@ Operators Associativity
 
 (unary) +, (unary) -, bnot, not
 
-/, *, div, rem, band, and Left associative
+/, {{{*}}}, div, rem, band, and Left associative
 
 +, -, bor, bxor, bsl, bsr, or, xor Left associative
 
@@ -84,7 +84,7 @@ E -> E '-' T
 
 E -> T
 
-T -> T '*' F
+T -> T '{{{*}}}' F
 
 T -> T '/' F
 
@@ -123,4 +123,3 @@ I -> E
 I -> string
 
 I -> boolean
-
