@@ -39,6 +39,30 @@ Si la variable no está definida es NULL, numérico=0, Booleano=Falso.
 
 Notación infija.
 
+== Precedencia==
+
+Operators Associativity
+
+:
+
+#
+
+(unary) +, (unary) -, bnot, not
+
+/, *, div, rem, band, and Left associative
+
++, -, bor, bxor, bsl, bsr, or, xor Left associative
+
+++, - - Right associative
+
+==, /=, =<, <, >=, >, =:=, =/=
+
+andalso
+
+orelse
+
+
+
 ==Relacionales==
 
 'hola' < 'casa'
@@ -77,30 +101,26 @@ F -> num
 
 == Terminales ==
 
-> , < , == , != , indicador, num
+> , < , == , string, num, /=, >= ,=<
 
 
-E -> T > T
+B -> I > I
 
-E -> T < T
+B -> I < I
 
-E -> T == T
+B -> I == I
 
-E -> T != T
+B -> I /= I
 
-E -> T >= T
+B -> I >= I
 
-E -> T =< T
+B -> I =< I
 
-T -> '(' E ')'
+B -> I
 
-T -> indicador
+I -> E 
 
-T -> numero
+I -> string
 
-T -> string
-
-
-==Final==
-
+I -> boolean
 
