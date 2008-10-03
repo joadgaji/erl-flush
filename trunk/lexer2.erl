@@ -1,5 +1,5 @@
--module(lexer2N).
--export([inicio/1]).
+-module(lexer2).
+-export([iniciol2/1]).
 
 -define(IN_RANGE(X, Start, End), (((Start) =< (X)) and ((X) =< (End)))). 
 -define(IS_DIGIT(X), ?IN_RANGE(X, $0, $9)).
@@ -9,7 +9,7 @@
 -define(IS_SPACE(X), ((X) == $ )).
 -define(IS_SYMBOL(X), ((X) == $+)or ((X) == $-) or ((X) == $*) or ((X) == $/) or ((X) == $=) or ((X) == $%) or ((X) == 40) or ((X) == 41)or ((X) == $<)or ((X) == $>)).
 
-inicio({_,Ren,Col,[_,_|T]})-> stateA(T,Ren,Col+2,[]).
+iniciol2({_,Ren,Col,[_,_|T]})-> stateA(T,Ren,Col+2,[]).
 
 %% Escoge entre los diferentes caractéres posibles
 stateA([H|T],Ren,Col,Result)->
@@ -29,13 +29,15 @@ stateA([H|T],Ren,Col,Result)->
 stateB([H|T],Ren,Col,Result, Partial,R,C)->
 	if 
 		(H == $') 	-> stateI(T, Ren, Col + 1, Result, [H|Partial], R, C, cadena);
+		(H == 10)	-> stateB(T, Ren+1, 1, Result, [H|Partial], R, C);
 		true		-> stateB(T, Ren, Col + 1, Result, [H|Partial], R, C)
 	end.
 	
 %% Revisa una cadena de string con comilla dolbe
 stateC([H|T],Ren,Col,Result, Partial,R,C)->
 	if 
-		(H == $") 	-> stateI([H|T], Ren, Col, Result, Partial, R, C, cadena);
+		(H == $") 	-> stateI(T, Ren, Col+ 1, Result, [H|Partial], R, C, cadena);
+		(H == 10)	-> stateC(T, Ren+1, 1, Result, [H|Partial], R, C);
 		true		-> stateC(T, Ren, Col + 1, Result, [H|Partial], R, C)
 	end.
 	
@@ -78,6 +80,12 @@ stateH([H|T],Ren,Col,Result, Partial,R,C)->
 %% Tolo de que esté es partial lo concatena a el resultado final
 stateI([H|T], Ren, Col, Result, Partial, R, C, Type)->
 		 stateA([H|T], Ren, Col, [{Type, R, C, lists:reverse(Partial)}|Result]).
+		 
+%stateJ([H|T], Ren, Col, Result, Partial, R , C)	->
+%	if
+%		H == $n	-> stateC(T, Ren + 1, Col, Result, [H|Partial], R, C);
+%		true	-> stateC(T, Ren, Col + 1, Result, [H|Partial], R, C)
+%	end.
 
 %% Estado que revida el stack antes de terminar
 stateK([H|_],Result)->
@@ -85,4 +93,10 @@ stateK([H|_],Result)->
 		(H == $}) 	->lists:reverse(Result);
 		true 		-> throw(invalidsyntax)
 	end.
+
+%stateL([H|T], Ren, Col, Result, Partial, R, C ,Type)	->
+%	if 
+		%H == $"	-> stateI(T, Ren, Col + 1,  Result, [H|Partial], R, C, Type);
+		%true		->stateJ(T, Ren, Col + 1, Result, [H|Partial], R, C, Type)
+%	end.
 
