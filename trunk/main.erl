@@ -26,9 +26,9 @@ stateB([H|T], Result)	->
 stateC([{Type, R, C, A}|T], Partial)	->
 	if
 		Type == simbolo 	-> stateC(T, [{list_to_atom(A), R, C, Type}|Partial]);
-		Type == entero 	-> stateC(T, [{Type, R, C, lists:sum([X- 48||X <- A])}|Partial]);
-		Type == float 	-> stateC(T, [{Type, R, C,lists:sum([X- 48||X <- A])}|Partial]);
-		Type == cadena 	-> stateC(T, [{Type, R, C,lists:concat(A)}|Partial]);
+		Type == entero 	-> stateC(T, [{Type, R, C, list_to_integer(lists:concat([X- 48||X <- A]))}|Partial]);
+		Type == float 	-> stateC(T, [{Type, R, C, list_to_float(A)}|Partial]);
+		Type == cadena 	-> stateC(T, [{Type, R, C, lists:concat([A])}|Partial]);
 		Type == final 	-> lists:reverse(Partial);
 		true 	-> stateC(T, [{Type, R, C, A}|Partial])
 	end.
