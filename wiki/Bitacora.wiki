@@ -11,3 +11,5 @@
 || 12-Sep-2008 || 1 hrs || Adrian y Mamachuy || El manejo de los strings y las pruebas de lexer2N || Refactorización de lexer2N así como la documentación del proyecto. Anexe unos comentarios que puedan ser de utilidad.  ||
 || 24-Sep-2008 || 1.5 hrs || Adrian, Luna, Mary, Malto y Mamachuy || Ninguna || Establecer convenciones, agregar signos: <,> y ! al lexer2N y definicion de la gramatica para expresiones aritmeticas  ||
 || 01-Oct-2008 || 3 hrs || Adrian, Luna, Mary, Malto y Mamachuy || Ninguna =) || Cambio de signo ! por / en el lexer2N. Se agrego a la gramatica(en papel) expresiones relacionales y logicas. Comienzo de implementacion de la tarjeta 4 parser1 llamara a lexer1 y lexer1  llamara a lexer2. ||
+|| 03-Oct-2008 || 1 hr || Adrian y Mamachuy || Al convertir Strings, numbers y floats || Se creo una clase que una parser1, lexer1 y lexer2, que además le da formato a las tuplas para mandarlas a yecc||
+|| 03-Oct-2008 || 2 hrs || Luna, Mary, Malto y Mamachuy || En los test del parser(yecc) ||  Se creo la gramatica con yecc y se resolvieron los problemas con strings, float e integers ||
