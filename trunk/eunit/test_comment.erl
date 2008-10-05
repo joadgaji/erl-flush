@@ -1,5 +1,5 @@
--module(test_parser1).
--import(parser1, [inicio/1]).
+-module(test_comment).
+-import(comment, [inicio/1]).
 
 -ifdef(windows) .
 -include_lib("C:/tools/eunit/include/eunit.hrl").

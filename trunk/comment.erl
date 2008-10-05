@@ -1,4 +1,4 @@
--module(parser1).
+-module(comment).
 -export([inicio/1]).
 
 inicio(Input) ->
