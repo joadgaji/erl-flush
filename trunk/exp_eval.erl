@@ -38,10 +38,6 @@ stateB([H|T], Result, Dic)	->
 		true 	-> stateB(T, [H|Result],Dic)
 	end.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% El lexer3, va a empezar desde stateC y todo lo de arriba se va a quitar
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %Se toma el valor regresado por lexer 3 y se evalua, regresa el resultado de la evaluacion
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% aqui entra en stateG -> [{entero, 1, 2, 5}, {'+', 1,2}, {entero,1,4, 6}]   y sale un 11.

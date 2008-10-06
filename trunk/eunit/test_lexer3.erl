@@ -14,7 +14,7 @@ principal_float_test_()	->
 [?_assert(principal([{float, 1,2, "34.69"}])==[{float, 1,2, 34.69000}])].
 
 principal_cadena_test_()	->
-[?_assert(principal([{cadena, 3,4, "micadena"}])==[{cadena,3,4,"micadena"}])].
+[?_assert(principal([{cadena, 3,4, "\"micadena\""}])==[{cadena,3,4,"micadena"}])].
 
 principal_identificador_test_()	->
 [?_assert(principal([{identificador, 4,5,"or"}])==[{'or', 4,5,identificador}]),
