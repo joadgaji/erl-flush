@@ -1,7 +1,7 @@
 -module(lexer1).
--export([inicio/1]).
+-export([iniciol1/1]).
 
-inicio(Input) ->
+iniciol1(Input) ->
 	case file:read_file(Input) of
 		{ok, S} -> L = binary_to_list(S),
 			stateA(lists:append(L, "$$"), 1, 1, []);

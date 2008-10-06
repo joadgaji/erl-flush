@@ -1,5 +1,5 @@
 -module(test_lexer1).
--import(lexer1, [inicio/1]).
+-import(lexer1, [iniciol1/1]).
 
 -ifdef(windows) .
 -include_lib("C:/tools/eunit/include/eunit.hrl").
@@ -8,7 +8,7 @@
 -endif.
 
 inicio_test_() ->
-    [?_assert(inicio("eunit/test_lexer1.html") == [
+    [?_assert(iniciol1("eunit/test_lexer1.html") == [
     		{estatico,1,1,"<!-- hola \n\t"},
     		{expresion,2,2,"{{}}"},
 		{estatico,2,6,"\n\t"},
@@ -22,13 +22,13 @@ inicio_test_() ->
 		{estatico,10,21,"\n\t</body>\n</html>\n\n"}])].
 		
 inicio_especiales_test_() ->
-	[?_assert(inicio("{{ '{{' }}") == [{expresion,1,1,"{{ '{{' }}"}]),
-	?_assert(inicio("{% '%}' %}") == [{enunciado,1,1,"{% '%}' %}"}])].
+	[?_assert(iniciol1("{{ '{{' }}") == [{expresion,1,1,"{{ '{{' }}"}]),
+	?_assert(iniciol1("{% '%}' %}") == [{enunciado,1,1,"{% '%}' %}"}])].
 	
 inicio_excepciones_test_() ->
-	[?_assertThrow(invalidsyntax, inicio("{% {{ }} %}")),
-	?_assertThrow(invalidsyntax, inicio("{{ {% %} }}"))].
+	[?_assertThrow(invalidsyntax, iniciol1("{% {{ }} %}")),
+	?_assertThrow(invalidsyntax, iniciol1("{{ {% %} }}"))].
 	
 inicio_nueva_linea_test_() ->
-	[?_assert(inicio("{{ \"\n\" }}") /= [{expresion,1,1,"{{ \"
+	[?_assert(iniciol1("{{ \"\n\" }}") /= [{expresion,1,1,"{{ \"
 	\" }}"}])].
