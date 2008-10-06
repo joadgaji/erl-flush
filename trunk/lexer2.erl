@@ -7,7 +7,8 @@
 -define(IS_UPPER(X), ?IN_RANGE(X, $A, $Z)).
 -define(IS_LETTER(X), (?IS_LOWER(X) or ?IS_UPPER(X))).
 -define(IS_SPACE(X), ((X) == $ )).
--define(IS_SYMBOL(X), ((X) == $+)or ((X) == $-) or ((X) == $*) or ((X) == $/) or ((X) == $=) or ((X) == $%) or ((X) == 40) or ((X) == 41)or ((X) == $<)or ((X) == $>)).
+-define(IS_SYMBOL(X), ((X) == $+)or ((X) == $-) or ((X) == $*) or ((X) == $/) or ((X) == $=) or 
+	((X) == $%) or ((X) == 40) or ((X) == 41)or ((X) == $<)or ((X) == $>) or ((X) == $[) or ((X) == $])).
 
 iniciol2({_,Ren,Col,[_,_|T]})-> stateA(T,Ren,Col+2,[]).
 

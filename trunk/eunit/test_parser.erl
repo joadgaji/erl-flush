@@ -23,3 +23,9 @@ parse_parentesis_test_() ->
 %%5-4/2		
 parse_precedencia_division_test_() ->
 [?_assert(parse([{entero,1,2,5},{'-',1,3,simbolo},{entero,1,4,4}, {'/',1,6,simbolo},{entero,5,5,2}]) == {ok,{'-',5,{'/',4,2}}})].
+
+parse_exp_logicas_test_()	->
+[?_assert(parse([{entero,1,2,5},{'or'},{entero,1,3,10}])=={ok,{'or', 5,10}}),
+	?_assert(parse([{'not', 4,5},{'('},{identificador, 4,6,'hola'},{')'}])=={ok, {'not', hola}}),
+	?_assert(parse([{'not'},{'('},{identificador, 3,4,'bien'},{'/='},{cadena, 5,6,"tu papa"},{')'}])==
+	{ok,{'not',{'/=',bien,"tu papa"}}})].
