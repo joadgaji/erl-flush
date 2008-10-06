@@ -64,6 +64,9 @@ stateG(List, Dic)->
 
 eval_({X,A,B}, Dic)-> 
 	if
+		is_tuple (A) and is_tuple(B) -> eval_({X,eval_(A,Dic),eval_(B,Dic)});
+		is_tuple (A) -> eval_({X,eval_(A,Dic),B});
+		is_tuple(B) -> eval_({X,A,eval_(B,Dic)});
 		is_boolean(A) or is_boolean(B) -> eval_({X,A,B});
 		is_atom(A) and is_atom(B) -> eval_({X,eval_atom(A,Dic),eval_atom(B,Dic)});
 		is_atom(A) -> eval_({X,eval_atom(A,Dic),B});
