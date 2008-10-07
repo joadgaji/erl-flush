@@ -12,7 +12,7 @@ stateA([{Type, R, C, A}|T], Partial)	->
 	if
 		Type == simbolo	-> stateC(T, Partial, R, C, A);
 		Type == entero 	-> stateA(T, [{Type, R, C, list_to_integer(A)}|Partial]);
-		Type == float 	-> stateA(T, [{Type, R, C, list_to_float(A)}|Partial]);
+		Type == float 	-> stateA(T, [{Type, R, C, list_to_float("0"++ A)}|Partial]);
 		% El string cuando es leido de un archivo viene con commillas dobles 
 		Type == cadena	-> stateA(T, [{Type, R, C, string:sub_string(lists:concat([A]),2,string:len(A)-1)}|Partial]);
 		Type == identificador	-> stateB([{Type, R, C, A}|T], Partial);

@@ -145,9 +145,9 @@ eval_({'++', A, B})->
 		true -> "error"
 	end.
 
+eval_atom( _, []) 	-> false;
 eval_atom( N, [{X,Value}|T])->
 	if
 		X == N -> Value;
-		X =/= N -> eval_atom(N,T);
-		true -> false
+		X /= N -> eval_atom(N,T)
 	end.

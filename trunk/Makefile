@@ -1,4 +1,4 @@
-pruebas :  comment.beam lexer1.beam lexer2.beam lexer3.beam parser.beam exp_eval.beam\
+pruebas :  comment.beam lexer1.beam lexer2.beam lexer3.beam parser.beam exp_eval.beam peval.beam\
 		test_comment.beam test_lexer1.beam test_lexer2.beam test_lexer3.beam test_parser.beam test_eval.beam
 	erl -noshell -s test_comment test -s init stop
 	erl -noshell -s test_lexer1 test -s init stop
@@ -27,6 +27,9 @@ parser.beam : parser.erl
 
 exp_eval.beam : exp_eval.erl
 	erlc $(WIN) exp_eval.erl
+
+peval.beam : peval.erl
+	erlc peval.erl
 
 subdirs :
 	cd eunit; make
