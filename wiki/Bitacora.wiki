@@ -14,3 +14,5 @@
 || 03-Oct-2008 || 1 hr || Adrian y Mamachuy || Al convertir Strings, numbers y floats || Se creo una clase que una parser1, lexer1 y lexer2, que además le da formato a las tuplas para mandarlas a yecc||
 || 03-Oct-2008 || 2 hrs || Luna, Mary, Malto y Mamachuy || En los test del parser(yecc) ||  Se creo la gramatica con yecc y se resolvieron los problemas con strings, float e integers ||
 || 05-Oct-2008 || 4.5 hrs || Adrian, Mary, Malto y Mamachuy ||Integracion de los lexers, agregar funcionalidad al parser ||  Elaboracion del lexer3 que hace lo necesario para que el parser tenga su entrada correspondiente, agregar funcionalidad al parser, integracion de los lexers e implementacion del evaluador de expresiones||
+|| 06-Oct-2008 || 1 hrs || Adrian, Mary, Malto, Mamachuy y Luna || Salio un caso no considerado  || Se corrigió el caso y se añadió la clase peval para que regresara el resultado en un string||
+|| 08-Oct-2008 || .5 hrs || Adrian, y Mamachuy || Se nos olvido agregar el test de peval.erl || Elaboración de la prueba de unidad, test_peval.erl ||
