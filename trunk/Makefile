@@ -1,11 +1,12 @@
 pruebas :  comment.beam lexer1.beam lexer2.beam lexer3.beam parser.beam exp_eval.beam peval.beam\
-		test_comment.beam test_lexer1.beam test_lexer2.beam test_lexer3.beam test_parser.beam test_eval.beam
+		test_comment.beam test_lexer1.beam test_lexer2.beam test_lexer3.beam test_parser.beam test_eval.beam test_peval.beam
 	erl -noshell -s test_comment test -s init stop
 	erl -noshell -s test_lexer1 test -s init stop
 	erl -noshell -s test_lexer2 test -s init stop
 	erl -noshell -s test_lexer3 test -s init stop
 	erl -noshell -s test_parser test -s init stop
 	erl -noshell -s test_eval test -s init stop
+	erl -noshell -s test_peval test -s init stop
 	
 	
 WIN = 
@@ -51,6 +52,9 @@ test_parser.beam : eunit/test_parser.erl
 
 test_eval.beam : eunit/test_eval.erl
 	erlc $(WIN) eunit/test_eval.erl
+	
+test_peval.beam : eunit/test_peval.erl
+	erlc eunit/test_peval.erl
 
 clean : borra pruebas
 	
