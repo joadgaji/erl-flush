@@ -1,0 +1,6 @@
+{port, 8800}.
+{root, "home/adrian/tipos"}.
+{pagina200, "home/adrian/servidor/pagina200"}.
+{pagina404, "home/adrian/servidor/pagina404"}.
+{pagina405, "home/adrian/servidor/pagina405"}.
+
