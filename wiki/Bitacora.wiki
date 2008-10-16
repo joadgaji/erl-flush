@@ -18,3 +18,4 @@
 || 08-Oct-2008 || .5 hrs || Adrian, y Mamachuy || Se nos olvido agregar el test de peval.erl || Elaboración de la prueba de unidad, test_peval.erl ||
 || 12-Oct-2008 || 5 hrs || Luna, Adrian, Malto, Mary y Mamachuy ||  Activar los puertos || Elaboración del Servidor Web y su archivo de Configuración. ||
 || 15-Oct-2008 || 2.5 hrs || Luna, Adrian, Malto, Mary y Mamachuy ||  - || Corregir detalles. Hacer un cliente para el servidor y ayude en las pruebas. Incluir metodo POST al servidor y mandar error 405 si no es un metodo valido (GET o POST). ||
+|| 16-Oct-2008 || 1.5 hrs || Adrian y Mamachuy ||  Problemas para leer la informacion de los archivos || Actualizar el make, corregir detalles del servidor ||
