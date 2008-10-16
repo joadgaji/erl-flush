@@ -1,0 +1,841 @@
+/*Para los titulos de pagina*/
+#content H1 { margin-top : 8px; color : #990000;}
+/*Para el cuadro de cual es tu equipo*/
+DIV.yourTeam {
+	background-color : #F7F7F7;
+	background : url(../img/img_equipo.gif) no-repeat;
+	border : solid 1px #B2B2B2;
+		padding : 50px 0 12px 5px;
+	text-align : center;
+}
+/*Para el componente de tu equipo (version pequenya)*/
+DIV.yourTeam.litleFlags {
+	margin-bottom:15px; 
+	padding-bottom : 0;
+	background-image:url(../img/img_equipo_litle.gif);
+}
+DIV.yourTeam.litleFlags UL {background-color:#FAFAFA; padding-bottom:12px !important;}
+DIV.yourTeam LI {
+	float : left;
+	width : 60px;
+	text-align : right;
+	margin : 12px 7px 0 0!important;
+	padding:0;
+}
+/*Para el componente de tu equipo*/
+DIV.yourTeam.litleFlags LI{
+	width : 30px;
+	margin: 6px 2px 0 0 !important
+}
+DIV.yourTeam LI IMG { 
+	margin:0; 
+	padding:0; 
+	vertical-align:top; 
+	width:42px; 
+	height:42px;
+}
+/*Para las imagenes pequenyas*/
+DIV.yourTeam.litleFlags LI IMG {
+	width:30px; 
+	height:30px;
+}
+DIV.yourTeam LI INPUT {
+	margin:14px 0 0 2px; 
+	padding:0; 
+	width:12px;
+}
+/*Para el carrusel*/
+#carrousel {
+	margin : 0;
+	padding : 15px 0 15px 15px;
+	background-image : url(../img/img_back_principal.gif);
+	height : 278px;
+}
+#carrousel LI {
+	float : left;
+	display : inline;
+}
+/*Para el banner de publicidad*/
+#carrousel LI#banner_300 {padding : 12px 0 0 15px;}
+/*Para la tabla de alineacion y resultados*/
+UL.chessedUL LI.numAlgn, UL.chessedUL LI.positionAlgn, UL.chessedUL LI.goalsnAlgn,
+UL.chessedUL LI.assistAlgn, UL.chessedUL LI.minutesAlgn, UL.chessedUL LI.yellowsAlgn,
+UL.chessedUL LI.redsAlgn, UL.chessedUL LI.teamNam, ul.chessedUL LI.jornaScore,
+ul.chessedUL LI.jornaTime, ul.chessedUL LI.jornaChannel, LI.sefCont ul.chessedUL LI.refAmon, 
+LI.sefCont ul.chessedUL LI.refTec, LI.sefCont ul.chessedUL LI.reduApCl, 
+LI.sefCont ul.chessedUL LI.reduPer, LI.sefCont ul.chessedUL LI.reduTempo,
+LI.sefCont ul.chessedUL LI.goaling, LI.sefCont ul.chessedUL LI.goalS,
+LI.sefCont ul.chessedUL LI.grpPts, LI.sefCont ul.chessedUL LI.locPoints,
+LI.sefCont ul.chessedUL LI.keeperGames, LI.sefCont ul.chessedUL LI.keeperMinutes,
+LI.sefCont ul.chessedUL LI.keeperGoals, LI.sefCont ul.chessedUL LI.minorAcum,
+LI.sefCont ul.chessedUL LI.minorRest, LI.sefCont ul.chessedUL LI.suspGames, ul.chessedUL li.numbersNBA,
+ul.chessedUL li.refDJA, ul.chessedUL li.refDAmone, ul.chessedUL li.refDExpul, ul.chessedUL li.refDTec, ul.chessedUL li.refDPen {
+	padding : 6px 0 !important;
+	text-align : center;
+}
+/*Para los tamaños de la tabla*/
+UL.chessedUL LI.numAlgn {width : 8%;}
+UL.chessedUL LI.nameAlgn {width : 23%; max-width:20%;}
+UL.chessedUL LI.positionAlgn {width : 11%;}
+UL.chessedUL LI.goalsnAlgn {width : 9%;}
+UL.chessedUL LI.assistAlgn {width : 14%;}
+UL.chessedUL LI.minutesAlgn {width : 11%;}
+UL.chessedUL LI.yellowsAlgn {width : 12%;}
+UL.chessedUL LI.redsAlgn {width : 11%;}
+UL.chessedUL LI.resultsHist {
+	width : 42%; 
+	max-width:35%;
+	font: normal 11px Arial, Helvetica;
+	color : #333333;
+	padding-top: 7px !important;
+}
+UL.chessedUL LI.teamNam {width : 29%;}
+/*Para simularlo oculto en los darkerBG*/
+UL.chessedUL.darkerBG LI.resultsHist {
+	background-color : #FFF;
+	min-height : 15px;
+}
+/*Para los cuadros de pronosticos*/
+P.pronostQuest {
+	margin : 6px 0 0 0;
+	padding : 0;
+	font : normal 11px Arial, Helvetica;
+	color : #333;
+}
+/*Para el modulo de escuchalo o velo*/
+Ul.listenOrWatchIt {
+	border : solid 1px #CCC; 
+	margin-bottom : 15px !important;
+	max-width:298px;
+}
+Ul.listenOrWatchIt LI {
+	height : 66px;
+	padding-left : 80px !important;
+	padding-top : 10px !important;
+	max-height : 56px;
+	font : normal 11px Arial, Helvetica;
+	color : #333;
+}
+/*Para el titulo del programa*/
+Ul.listenOrWatchIt LI A {
+	font : normal 18px Arial, Helvetica;
+	color : #990000;
+	text-decoration:none;
+}
+/*Para el partido*/
+Ul.listenOrWatchIt LI P {
+	margin : 0;
+	padding : 0;
+	font : normal 13px Arial, Helvetica;
+	color : #333;
+}
+/*Para la imagen del programa*/
+Ul.listenOrWatchIt LI IMG {
+	vertical-align : top; 
+	float : left;
+	margin-right : 14px;
+}
+Ul.listenOrWatchIt LI.watchIt { 
+	border-bottom : dotted 1px #CCC;
+	background : url(../img/img_icon_ver.gif)  no-repeat;
+
+}
+Ul.listenOrWatchIt LI.listenIt {
+	background : url(../img/img_icon_radio.gif) no-repeat;
+}
+/*Pestanya de alineacion*/
+/*Para las estadisticas de equipo (tiros a gol, esquinas...)*/
+LI.teamStatsNfo {
+	width : 170px;
+	margin-right : 34px !important;
+	float : left;
+}
+/*Para el equipo que esta del lado derecho*/
+LI.teamStatsNfo.rgtAlign {margin : 0 0 0 34px !important;}
+/*Nombre del equipo*/
+LI.teamStatsNfo H3, LI.teamStatsNfo H3 A{
+	font : bold 24px Arial, Helvetica !important;
+	color : #333;
+	text-decoration : underline;
+	margin:0 0 10px 0;
+}
+
+
+
+
+
+LI.teamStatsNfo.rgtAlign H3 {text-align:right;}
+/*Para las estadisticas*/
+LI.teamStatsNfo ul.chessedUL {background-color : #eff5eb;}
+LI.teamStatsNfo ul.chessedUL.darkBG {background-color : #dee4da;}
+LI.teamStatsNfo ul.chessedUL LI.nfoLI {width:126px; max-width:106px}
+/*Para la alineacion de arbitros*/
+LI.refereesNfo {
+	width : 180px;
+	margin-top : 38px !important;
+	text-align : center;
+	font : normal 12px Arial, Helvetica;
+	color : #666;
+	border : solid 1px #E5E5E5;
+	float : left;
+	padding-top:10px !important;
+}
+LI.refereesNfo SPAN, LI.refereesNfo STRONG {display:block;}
+LI.refereesNfo STRONG {margin-bottom:14px;}
+LI.refereesNfo SPAN STRONG {margin-bottom:0;}
+/*Para las alineaciones*/
+LI.playersAlignmnt {
+	width : 296px;
+	max-width : 289px;
+	margin : 10px 12px 0 0 !important;
+	float : left;
+}
+LI.playersAlignmnt.noMargin {margin-right:0 !important;}
+LI.playersAlignmnt ul.chessedUL, DIV.jornaTables ul.chessedUL {background-color : #F7F7F7; border-bottom: solid 1px #FFF;}
+LI.playersAlignmnt ul.chessedUL.darkBG, DIV.jornaTables ul.chessedUL.darkBG {background-color : #E5E5E5;}
+LI.playersAlignmnt ul.chessedUL.darkerBG, DIV.jornaTables ul.chessedUL.darkerBG {background-color : #ccc;}
+LI.playersAlignmnt ul.chessedUL li {min-height:14px;}
+LI.playersAlignmnt.noMargin ul.chessedUL li.posTeam {width:100px !important;}
+LI.playersAlignmnt ul.chessedUL li.posTeam {max-width:87px !important;}
+LI.playersAlignmnt ul.chessedUL li.posTeam A {max-width:87px !important; text-decoration:underline;}
+LI.playersAlignmnt ul.chessedUL.notPlaying {background-color:#eaf1f7;}
+LI.playersAlignmnt ul.chessedUL.notPlayinger {background-color:#d9e0e6;}
+/*Para los cambios*/
+LI.playersAlignmnt ul.chessedUL LI.noBorder {color:#990000}
+LI.playersAlignmnt ul.chessedUL.notPlaying LI.noBorder {color:#0000CC}
+/*Para el director tecnico*/
+LI.playersAlignmnt ul.chessedUL.dtUL {background-color:transparent;}
+LI.playersAlignmnt ul.chessedUL.dtUL LI {background-color:#8191a1; color:#FFF;}
+LI.playersAlignmnt ul.chessedUL.dtUL LI A {color:#FFF;}
+/*Para la pestanya de minuto x minuto*/
+ul.menuBar LI.minxmin {
+	float : right;
+	background : none;
+	color : #000000;
+	border : none;
+	font : bold 18px Arial, Helvetica;
+}
+
+DIV.doubleMenuContainer.minxminTab {padding:10px;}
+DIV.doubleMenuContainer.minxminTab ul.chessedUL li {min-height:14px;}
+DIV.doubleMenuContainer.minxminTab ul.chessedUL li.numbers.minIcon {padding:3px 0 0 0 !important;}
+DIV.doubleMenuContainer.minxminTab ul.chessedUL.darkerBG {background-color : #CCC;}
+DIV.doubleMenuContainer.minxminTab ul.chessedUL.darkerBG LI{font : bold 12px Arial, Helvetica !important;}
+DIV.doubleMenuContainer.minxminTab ul.chessedUL li.noBorder {
+	font: normal 11px Arial, Helvetica;
+	width:510px;
+	max-width:492px;
+}
+/*Para la ubicacion actual*/
+ul.wheresNote li {color : #333;}
+ul.wheresNote li a {color : #333;}
+/*Para el H3 que contiene el nombre del jugador*/
+H3.playersNameH3 {
+	font: bold 36px Arial, Helvetica;
+	margin-bottom : 8px;
+}
+/*Para el H3 que contiene el nombre del arbitro*/
+H3.refereesName {
+	font: bold 36px Arial, Helvetica !important;
+	margin : 0 0 8px 0 !important;
+	color:#990000 !important;
+}
+/*Para los balazos extras de Trayectoria*/
+LI.bioCommunitiesData H4.trayectBio {padding-left:71px;}
+/*Para la tabla de estadisticas por jugador*/
+DIV.playerStats {padding: 10px;}
+/*Para el nombre de jugador dentro de sus estadisticas*/
+DIV.playerStats H3 {
+	margin : 0;
+	font : bold 14px Arial, Helvetica;
+	color : #666;
+}
+DIV.playerStats ul.chessedUL {border-bottom: solid 1px #FFF;}
+DIV.playerStats ul.chessedUL li.redsAlgn {width:12%}
+DIV.playerStats ul.chessedUL li.yellowsAlgn {width:14%}
+/*Para el menu de pestanyas de jornadas*/
+UL.menuBar.jornaMenu LI {
+	padding : 6px 0 !important; 
+	max-height: 15px;
+	width:24px;
+	max-width:22px;
+	text-align:center;
+}
+UL.menuBar.jornaMenu LI A {
+	font : bold 14px Arial, Helvetica;
+	color : #666;
+}
+ul.menuBar.jornaMenu li.active { padding: 4px 0 5px 0 !important; max-height: 18px;}
+ul.menuBar.jornaMenu li.active, ul.menuBar.jornaMenu li.active A {
+	font-size : 16px;
+	color : #990000;
+}
+/*Para el menu que tiene el select de calendario de jornadas*/
+UL.jornaCalendar {margin-bottom:6px !important;}
+UL.jornaCalendar LI {
+	font : normal 18px Arial, Helvetica;
+	color : #666;
+	float : left;
+}
+UL.jornaCalendar LI H1 {margin:0 !important;}
+UL.jornaCalendar LI.selecJorna { float:right;}
+UL.jornaCalendar LI.selecJorna SELECT {width:150px; margin-top:4px;}
+DIV.doubleMenuContainer H3.jornaDate {
+	margin : 0;
+	padding : 0;
+	font : normal 14px Arial, Helvetica;
+	color : #666;
+}
+DIV.doubleMenuContainer H3.jornaDate.spacedTop {margin-top:10px;}
+/*Para las tablas de Jornadas*/
+DIV.jornaTables ul.chessedUL.darkerBG.jornaTitles {background-color:#D5D5D5;}
+DIV.jornaTables ul.chessedUL LI {
+	padding-top : 8px !important;
+	padding-bottom : 8px !important;
+}
+DIV.jornaTables ul.chessedUL.darkerBG.jornaTitles LI {
+	font-weight:normal;
+	color:#666;
+	padding-top : 5px !important;
+	padding-bottom : 5px !important;
+}
+ul.chessedUL LI.jornaTeam {width: 160px; max-width:144px;}
+ul.chessedUL LI.jornaScore {width : 72px; min-width:73px;}
+ul.chessedUL LI.jornaTime {width : 50px;}
+DIV.jornaTables ul.chessedUL LI.jornaChannel {width : 46px;}
+ul.chessedUL LI.jornaChronic A {text-decoration:underline;}
+DIV.jornaTables ul.chessedUL LI.withIcon {
+	padding-top:5px !important; 
+	padding-bottom:5px !important;
+}
+DIV.jornaTables ul.chessedUL LI.withIcon IMG {height:21px; vertical-align:middle; margin-right:5px;}
+DIV.jornaTables ul.chessedUL LI.jornaChannel.withIcon IMG {margin-right:0;}
+/*Para todas las tablas que tienen informacion al pie (terminologia, indicaciones, etc)*/
+UL.tablefooter LI {
+	width : 50%;
+	float : left;
+	margin-top : 8px !important;
+	font:normal 11px Arial, Helvetica;
+	color : #666;
+}
+UL.tablefooter LI.noBottomSpace {width : 166px;}
+UL.tablefooter LI.playersPlant {width:auto; margin-top : 0 !important;}
+UL.tablefooter LI A {font-weight:normal;}
+UL.tablefooter LI SPAN {display : block;}
+UL.tablefooter LI.importantNote {font-size:12px;}
+UL.tablefooter LI.importantNote STRONG.VIT {color:#333;;}
+/*Para el Titulo de Jornada SEF*/
+LI.notesContainerLI.noPadds UL.jornaCalendar {margin-bottom:0 !important}
+/*Para las ligas del SEF*/
+LI.sefLinks {
+	font : normal 11px Arial, Helvetica;
+	color : #CCC;
+	line- height : 14px;
+}
+LI.sefLinks SPAN {width:394px; display:table-cell;}
+LI.sefLinks A {color:#666666; text-decoration:underline;}
+LI.sefLinks A.wrapLink {margin-right:10px;}
+/*Para todo el contenido de las paginas del sef*/
+LI.sefCont H3 {
+	font: bold 18px Arial, Helvetica;
+	color : #666;
+	margin : 8px 0;
+}
+LI.sefCont H3.independentTitle.borderedTitle {
+	font-weight : normal;
+	color : #990000;
+	margin-top : 0;
+	padding-bottom : 2px;
+}
+/*Para las listas del SEF que tienen uno alineado a la derecha*/
+LI.sefCont H3.doableTbTitle {
+	font-weight:normal !important; 
+	color:#990000 !important; 
+	font-size:18px !important; 
+	text-align:left !important;
+}
+LI.sefCont H3.doableTbTitle.bestTeam {color:#666 !important;}
+LI.sefCont H3.doableTbTitle.bestTeam STRONG {color:#990000 !important; }
+LI.sefCont UL.h3Lsts LI H3.doableTbTitle {font-size:16px !important; }
+/*Generales de las tablas del sef*/
+LI.sefCont ul.chessedUL {
+	border-bottom : solid 1px #FFF;
+	background-color : #F7F7F7;
+}
+LI.sefCont ul.chessedUL LI {font : normal 12px Arial, Helvetica;}
+LI.sefCont ul.chessedUL LI A {text-decoration:underline;}
+LI.sefCont ul.chessedUL.darkBG {background-color:#E5E5E5;}
+LI.sefCont ul.chessedUL.darkerBG {background-color:#9A0000; color:#FFF;}
+LI.sefCont ul.chessedUL.darkerBG LI {font-weight:bold;}
+LI.sefCont ul.chessedUL LI.nu mbers {width:210px; max-width:194px;}
+/*Para la tabla de arbitros*/
+LI.sefCont ul.chessedUL LI.refName {width:240px; max-width:224px;}
+LI.sefCont ul.chessedUL LI.refAmon {width:57px;}
+LI.sefCont ul.chessedUL LI.refTec {width:88px;}
+/*Para la tabla de descenso*/
+LI.sefCont ul.chessedUL LI.reduName {width:112px; max-width:96px;}
+LI.sefCont ul.chessedUL LI.reduApCl {width:50px;}
+LI.sefCont ul.chessedUL LI.reduPer {width:66px; font-weight:bold; color:#990000;}
+LI.sefCont ul.chessedUL.darkerBG LI.reduPer {font-weight:normal; color:#FFF;}
+LI.sefCont ul.chessedUL LI.reduTempo {width:120px !important;}
+/*Para las tablas que estan dentro del fondo de tabla*/
+UL.tablefooter ul.chessedUL LI, UL.graysChessed ul.chessedUL LI{margin-top:0 !important; color:#000000;}
+UL.tablefooter ul.chessedUL {background-color : #FFF;}
+UL.tablefooter ul.chessedUL.darkBG {background-color:#F7F7F7;}
+UL.tablefooter ul.chessedUL.darkerBG {background-color:#E5E5E5;}
+UL.tablefooter ul.chessedUL.darkerBG LI, UL.graysChessed ul.chessedUL.darkerBG LI {color:#000;}
+/*Para las tablas de gris mas oscuro*/
+UL.graysChessed ul.chessedUL {background-color : #F7F7F7;}
+UL.graysChessed ul.chessedUL.darkBG {background-color:#E5E5E5;}
+UL.graysChessed ul.chessedUL.darkerBG {background-color:#DBDBDB;}
+/*Para las tablas de goleo por equipo*/
+LI.sefCont ul.chessedUL LI.goaling {width:140px;}
+/*Para las tabls de goleo individual*/
+LI.sefCont UL.h3Lsts LI.indGoaling {width:386px;}
+LI.sefCont UL.h3Lsts LI.indWinners {width:210px;}
+LI.sefCont UL.h3Lsts LI.indWinners DIV.containerComp {padding-bottom:10px;}
+LI.sefCont UL.h3Lsts LI.indWinners H4 {
+	font : bold 14px Arial, Helvetica;
+	color : #333;
+	margin : 10px 0 0 10px;
+}
+LI.sefCont UL.h3Lsts LI.indWinners SPAN {
+	font : normal 11px Arial, Helvetica;
+	color : #666;
+	margin : 4px 0 0 10px;
+	display : block;
+}
+LI.sefCont ul.chessedUL LI.goalPlayer {width:176px; max-width:160px;}
+LI.sefCont ul.chessedUL LI.goalS {width:58px;}
+/*Para la tabla de Grupos*/
+LI.sefCont ul.chessedUL LI.grpName {width:163px; max-width:147px;}
+LI.sefCont ul.chessedUL LI.grpPts {width:50px; font-weight:bold; color:#990000;}
+LI.sefCont ul.chessedUL.darkerBG LI.grpPts {color:#FFF;}
+/*Para las tablas de locales*/
+LI.sefCont ul.chessedUL LI.locTournamnts {width:94px; max-width:78px;}
+LI.sefCont ul.chessedUL LI.locPoints {width:60px;}
+/*Para la tabla de penales*/
+LI.sefCont ul.chessedUL LI.penalName {width:150px; max-width:134px;}
+/*Para la tabla de penales*/
+LI.sefCont ul.chessedUL LI.keeperName {width:226px; max-width:210px;}
+LI.sefCont ul.chessedUL LI.keeperGames {width:80px;}
+LI.sefCont ul.chessedUL LI.keeperMinutes {width:86px;}
+LI.sefCont ul.chessedUL LI.keeperGoals {width:70px; max-width:64px; font-weight:bold; color:#990000;}
+LI.sefCont ul.chessedUL.darkerBG LI.keeperGoals {color:#FFF;}
+/*Para la tabla de menores*/
+LI.sefCont ul.chessedUL LI.minorAcum {width:230px;}
+LI.sefCont ul.chessedUL LI.minorRest {width:180px; max-width:178px;}
+/*Para la tabla de suspensiones*/
+LI.sefCont ul.chessedUL LI.suspTeam {width:100px; max-width:84px;}
+LI.sefCont ul.chessedUL LI.suspGames {width:80px;}
+LI.sefCont ul.chessedUL LI.suspCause {width:250px; max-width:230px;}
+/*Para el indice de equipos*/
+DIV.indexTeamCont {padding:10px 5px 10px 10px; margin-bottom:10px; height:264px; max-height:244px;}
+UL.indexTeam LI {float:left; display:inline; width:150px;}
+UL.indexTeam LI.photo {
+	width:120px; 
+	height:140px;
+	border : solid 1px #E5E5E5;
+	margin-right:10px !important;
+}
+/*Para el nombre de equipo y boton de IR*/
+UL.indexTeam LI UL.linkTeam {border-bottom:dotted 1px #CCC; margin-bottom:4px !important;}
+UL.indexTeam LI UL.linkTeam LI {float:left; width:auto;}
+UL.indexTeam LI UL.linkTeam LI.right {float:right;}
+UL.indexTeam LI UL.linkTeam LI.right IMG {cursor:pointer;}
+UL.indexTeam LI UL.linkTeam LI H3 {font: normal 21px Arial, Helvetica; color:#990000; margin:0;}
+DIV.indexTeamCont H5, DIV.indexTeamCont SPAN B {font: normal 11px Arial, Helvetica; color:#666; margin:0; font-weight:normal;}
+DIV.indexTeamCont SPAN {font: normal 11px Arial, Helvetica; color:#000; display:block;}
+DIV.indexTeamCont SPAN A { font-weight:bold; color:#000; text-decoration:underline;}
+/*Para el indice de noticias*/
+li.titleIndex h1 {
+	font-size:18px !important;
+	font-weight:bold !important;
+	color:#666666 !important;
+	margin:0px;
+	padding:0px;
+	margin-top:0 !important;;
+}
+LI.textIndex div.generalNote h3, LI.textIndex div.generalNote h3 a,
+LI.textIndexIMGless div.generalNote h3, LI.textIndexIMGless div.generalNote h3 a 
+{font : normal 18px Arial, Helvetica !important;}
+LI.textIndex div.generalNote.noImgBack h4 a,
+LI.textIndexIMGless div.generalNote.noImgBack h4 a,
+DIV.indexMain div.generalNote.noImgBack h4 a {display:inline; color:#990000; margin-left:20px;}
+/*Para los numeros de otros deportes*/
+ul.chessedUL li.teamNameNBA {width: 60px; max-width: 44px;}
+ul.chessedUL li.numbersNBA {width: 70px;}
+UL.sportsBlogs LI {margin:0 0 10px 0 !important;}
+UL.sportsBlogs LI  H3.independentTitle {margin-bottom:5px !important; font-size:18px;}
+UL.sportsBlogs LI  H3.independentTitle STRONG {color:#990000;}
+/*Para el boton de busqueda*/
+#toGo{background-image:url(../img/img_btn_ir.gif);}
+/*Para el detalle de video*/
+UL.wheresNote H3 {color:#990000;}
+#detailVideo LI.relatedVideosLI LI H3 {color:#990000;}
+/*Para el home de video*/
+div.containerComp.sportsVideo {background-color:#F7F7F7;}
+ul.containerVideo h3 {color:#990000 !important; margin-bottom:10px !important;}
+div.containerComp.sportsVideo div.generalNote.noImgBack h4 a {display:inline; margin-left:14px;}
+div.containerComp.sportsVideo ul.containerVideo p.input {color:#666 !important;}
+div.containerComp.sportsVideo ul.containerVideo p.input INPUT { margin-top:4px;}
+/*Duplas de videos*/
+UL.imageNote.twoElements LI.textIndex H3, LI.textIndex H3,
+UL.imageNote.twoElements LI.textIndex H3 A, LI.textIndex H3 A{color:#990000 !important;}
+
+UL.imageNote.twoElements LI.textIndex.black H3, UL.imageNote.twoElements LI.textIndex.black H3 A{
+	color:#000000 !important; 
+	font-size:18px;
+	text-decoration:none;
+	margin:0px;
+	line-height:20px;
+}
+/*Para lo mejor calificado*/
+DIV.latest{font-family:Arial, Helvetica, sans-serif;}
+DIV.latest UL{
+	border-bottom:1px dotted #CCCCCC;
+	margin:5px !important;
+	padding:4px 0 8px 0 !important;
+}
+DIV.latest UL.end{
+	border-bottom:none;
+	padding-bottom:0px !important;
+}
+DIV.latest UL LI{padding-right:5px !important;}
+DIV.latest UL LI.image{float:left !important;}
+DIV.latest UL LI SPAN{
+	float:left; 
+	height:90px; 
+	width:120px;
+}
+DIV.latest UL LI H3{
+	font-size:12px;
+	margin:0px;
+}
+DIV.latest UL LI P{font-size:11px;}
+/*Para las fotogalerias*/
+DIV.indexMain h3, div.indexMain h3 A {color:#990000; text-decoration:none;}
+UL.sportPhotoGal {padding-top:10px !important;}
+UL.sportPhotoGal li.thumbIndex {margin-left:10px !important;}
+UL.sportPhotoGal LI.textIndex{width:470px;}
+/*Para los detalles del estadio*/
+#noteContent P {margin-bottom:10px;}
+#noteContent P SPAN.stadiumData {display:block; line-height:20px;}
+/*Para el indice de estadios*/
+.stadiumIndex {margin-bottom : 16px !important;}
+.stadiumIndex LI {
+	width : 300px;
+	float : left;
+	display : inline;
+	margin-right : 10px !important;
+}
+.stadiumIndex LI.noMarginRgt {margin-right:0 !important;}
+.stadiumIndex LI IMG {
+	display : block;
+	margin-bottom : 10px;
+	width : 300px !important;
+	height: 150px !important;
+}
+.stadiumIndex LI H3 {
+	margin-bottom : 4px;
+	font-weight : normal;
+	color : #990000;
+}
+.stadiumIndex LI SPAN {
+	font: normal 12px Arial, Helvetica;
+	color : #666;
+	display : block;
+}
+.stadiumIndex LI STRONG {color:#000;}
+/*Para el detalle de arbitro*/
+ul.chessedUL li.refDJA {width:60px;}
+ul.chessedUL li.refDAmone {width:150px;} 
+ul.chessedUL li.refDExpul {width:120px;} 
+ul.chessedUL li.refDTec {width:175px;} 
+ul.chessedUL li.refDPen {width:80px; max-width:78px;}
+/*Para cambiarle el color al menu de galerias */
+ul.menuBar.galleriesMenu LI.galleryTitle A {color : #990000;}
+
+/*Para las notas del index de repeteciones*/
+LI.eventNotes {margin : 10px 10px 10px 10px !important; font-family: Arial, Helvetica, sans-serif;}
+LI.eventNotes H3, LI.eventNotes H3 A,
+LI.eventNotes H5, LI.eventNotes H5 A,
+LI.eventNotes H6, LI.eventNotes H6 A{
+	margin:0 0 10px 0;
+	text-decoration:none;
+}
+LI.eventNotes H3, LI.eventNotes H3 A{ color:#666; font-size:24px;}
+LI.eventNotes H5, LI.textIndex.black H5{
+	font-size:12px;
+	color:#000000;
+}
+LI.textIndex.black H3, LI.textIndex.black H3 A{ line-height:18px !important;}
+LI.textIndex.black H3, LI.textIndex.black H3 A,
+LI.textIndex.black H5, LI.textIndex.black H5 A,
+LI.textIndex.black H6, LI.textIndex.black H6 A{
+	margin:0 0 5px 0 !important;
+}
+
+LI.eventNotes H6, LI.textIndex.black H6 A,
+LI.textIndex.black H6, LI.textIndex.black H6{
+	font-size:11px !important;
+	color:#990000 !important;
+}
+LI.textIndex.black H5, LI.textIndex.black H6{margin:0px;}
+
+LI.eventNotes H6, LI.eventNotes H6 A, 
+LI.textIndex.black H6, LI.textIndex.black H6 A{ font-weight:bold;}
+
+/* Para la imagen del evento*/
+LI.image350{
+	float:left; 
+	width:300px !important; 
+	height:150px !important;
+	margin:10px 10px 10px 10px !important;
+}
+
+DIV.contTitle.textBlack{ color:#000000;}
+DIV.contTitle.borderTop{border-top:1px solid #CCCCCC;}
+
+.independentTitle.size28{ 
+	font-size:28px !important;
+	margin:10px 0 15px !important;
+	.margin:10px 0 10px !important;
+}
+/*Para las tablas del sedep*/
+TABLE.chessedTable {
+	width:100%;
+	border:solid 1px #FFF;
+	font : normal 12px Arial, Helvetica;
+}
+TABLE.chessedTable TR.thField {
+	text-align:left;
+	background-color:#e5e5e5;
+	color : #000;
+}
+LI.sefCont TABLE.chessedTable TR.thField {background-color:#9A0000; color:#FFFFFF}
+TABLE.chessedTable TR.tdField {
+	text-align : left;
+	background-color : #E5E5E5;
+	color : #000;
+}
+#content li.oneThird TABLE.chessedTable TR.tdField {background-color : #F0F0F0;}
+TABLE.chessedTable TR.tdFieldDark {
+	text-align : left;
+	background-color : #F7F7F7;
+	color : #000;
+}
+#content li.oneThird TABLE.chessedTable TR.tdFieldDark {background-color : #FFF;}
+TABLE.chessedTable TH, TABLE.chessedTable TD {padding : 6px 8px;}
+TABLE.chessedTable TR A {color:#000; text-decoration:none;}
+TABLE.chessedTable TR TH A {color:#FFF; text-decoration:none;}
+
+UL.chronic{
+	width:955px;
+	height:120px;
+	background-color:#000000;
+	margin:0px !important;
+	padding:0px !important;
+	list-style:none;
+}
+
+UL.chronic LI{ 
+	list-style:none; 
+	float:left; 
+	height:118px;
+}
+
+UL.chronic LI.firstColumn{width:340px; font-family:Arial, Helvetica; text-align:left;}
+UL.chronic LI.teams{ width:145px;}
+UL.chronic LI.dataTournament{ width:120px;}
+
+UL.chronic LI SPAN.header{
+	display:block;
+	height:40px;
+	border-bottom:1px solid #202020;
+}
+UL.chronic LI SPAN.header H2,
+UL.chronic LI SPAN.header H3, 
+UL.chronic LI SPAN.header H4{
+	font-family:Arial, Helvetica, sans-serif;
+	margin:0px;
+	color:#FFFFFF;
+	text-align:center;
+	text-decoration:underline;
+	font-weight:normal;
+}
+
+UL.chronic LI SPAN.header H2{
+	padding-top:10px; 
+	font-size:24px;
+}
+UL.chronic LI SPAN.header H3{
+	padding-top:10px;
+	padding-left:15px;
+	font-size:24px;
+	text-decoration:none;
+	text-align:left;
+}
+UL.chronic LI SPAN.header H4{
+	padding-top:15px; 
+	font-size:18px;
+}
+
+UL.logo { 
+	margin:0px;
+	display:inline;
+}
+UL.logo LI{
+	height:70px; 
+	width:70px; 
+	float:left !important;
+}
+
+UL.logo LI SPAN{
+	width:50px; 
+	height:60px; 
+	background-color:#000; 
+	display:block; 
+	margin:2px 0 0 10px;
+	border:1px solid #262626;
+	background:url(../img/img_back_casilla_minxmin.gif) repeat-x;
+}
+
+UL.logo LI SPAN H1{
+	margin:0px; 
+	text-align:center;
+	font-size:45px;
+	line-height:55px;
+	color:#FFFFFF;
+}
+UL.logo LI IMG{margin:2px 0 0 4px;}
+
+UL.playData{
+	display:block; 
+	height:30px;
+	margin:0px; 
+	padding:0px;
+ }
+ 
+UL.playData LI{
+	padding-left:15px;
+	height:16px;
+	width:190px;
+	color:#FFFFFF;
+	font-size:13px;
+}
+
+UL.playData LI.date{ 
+	font-weight:bold;
+	padding-top:5px;
+} 
+
+UL.resultsInTime{
+	width:955px;
+	height:29px;
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	overflow:hidden;
+	background-color:#000;
+}
+
+UL.resultsInTime LI{ 
+	float:left;
+	height:29px;
+}
+UL.resultsInTime LI.resultsTab{
+	width:180px;
+	background-color:#333;
+	border-right:1px solid #666;
+	padding:7px 0 0 10px;
+
+}
+
+LI.resultsTab SPAN.labelResul{
+	color:#FFFFFF;
+	float:left;
+	font-size:12px;
+	font-weight:bold;
+
+}
+LI.resultsTab SPAN.openTaB, LI.lastTab SPAN.openTaB{
+	float:right;
+	margin-right:15px;
+}
+LI.lastTab SPAN.openTaB.right{ margin:0px;}
+
+UL.resultsInTime LI.inTransmition{margin-left:1px;}
+UL.resultsInTime LI.mexicanFoot{ padding:6px 0 0 8px;}
+
+UL.resultsInTime LI.currentMarker{
+	
+	width:500px;
+	max-width:490px;
+	color:#FFCC00;
+	font-family:"Courier New", Courier, monospace;
+	font-weight:bold;
+	font-size:16px;
+	text-align:center;
+	padding-top:5px;
+}
+UL.resultsInTime LI.currentMarker SPAN{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#FFFFFF;
+}
+UL.resultsInTime LI.lastTab{
+	width:100px;
+	padding:7px 0 0 0;
+}
+
+/*Para el nuevo minuto a minuto (de varios equipos al mismo tiempo)*/
+DIV#multiMxMCont UL {
+	width:100%;
+	overflow:hidden;
+	text-align:left;
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+DIV#multiMxMCont UL.MxMTodaysDate {background-color:#000;}
+#multiMxMCont UL.MxMTodaysDate LI {
+	float : left; 
+	display : inline;
+	font : bold 14px Arial, Helvetica;
+	color :#CCC;
+}
+#multiMxMCont UL.MxMTodaysDate LI.right {float:right; padding:6px 12px 0 0;}
+#multiMxMCont UL.MxMTodaysDate LI IMG {margin:2px 0 0 1px;}
+#multiMxMCont UL.MXMTodaysMtches {background-color : #222; padding:0 !important}
+#multiMxMCont UL.MXMTodaysMtches LI {
+	float : left;
+	display:inline;
+	width : 476px;
+	max-width : 464px;
+	height : 48px;
+	max-height : 42px;
+	border-bottom : dotted 1px #000;
+	border-right : dotted 1px #000;
+	padding : 5px 0 0 12px;
+	overflow : hidden;
+}
+#multiMxMCont UL.MXMTodaysMtches LI SPAN {
+	display:block; 
+	margin-bottom:3px; 
+	font: normal 10px Arial, Helvetica;
+	color:#999;
+}
+#multiMxMCont UL.MXMTodaysMtches LI A {text-decoration:none;}
+#multiMxMCont UL.MXMTodaysMtches LI A.MXMvsTeams {
+	color : #FFCC00;
+	font : bold 16px "Courier New", Courier, monospace;
+	margin-right:12px;
+}
+#multiMxMCont UL.MXMTodaysMtches LI A.MXMvsTime {
+	color : #CCC;
+	font : bold 14px Arial, Helvetica;
+	margin-right:8px;
+}
+#multiMxMCont UL.MXMTodaysMtches LI A.MXMvsTime STRONG {color:#FFF;}
+#multiMxMCont UL.MXMTodaysMtches LI A.MXMvsBtn IMG { vertical-align:middle;}
