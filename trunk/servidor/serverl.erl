@@ -27,18 +27,15 @@ loop(Socket) ->
 					{Response, New_header, BodyPage} = arecurso(Recurso),
 					io:format(Response, [New_header, BodyPage]),
 					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
+				(Metodo == "POST") -> 
+					{Response, New_header, BodyPage} = arecurso(Recurso),
+					io:format(Response, [New_header, BodyPage]),
+					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
 				(Metodo /= "GET") or (Metodo /= "POST") -> 
 					ArchivoPagina = leerarchivo(pagina405),
 					{ok, Pagina} = file:read_file(ArchivoPagina),
 					gen_tcp:send(Socket, [io_lib:format(binary_to_list(Pagina), [""])])
-				%(New_input == ["404"]) -> 
-				%	{ok, ArchivoPagina} = leerarchivo(pagina404),
-				%	{ok, Pagina} = file:read_file(ArchivoPagina),
-				%	gen_tcp:send(Socket, [io_lib:format(binary_to_list(Pagina), [""])]);
-				
 			end
-		%[Name|Extension] = string:tokens(Recurso, "."),
-		%	New_input = set_content_type(Extension,Input),
     end.
     
 print_time() ->
