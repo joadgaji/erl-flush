@@ -7,11 +7,12 @@ tests(Port,Request) ->
 test1(Port,Request) ->
     case gen_tcp:connect("localhost", Port, [binary,{packet, 0}]) of
 	{ok, Socket} ->
-	    io:format("Socket=~p~n",[Socket]),
+	    %%io:format("Socket=~p~n",[Socket]),
 	    gen_tcp:send(Socket, Request),
-	    Reply = wait_reply(Socket),
-	    io:format("Reply 1 = ~p~n", [Reply]),
-	    gen_tcp:close(Socket);
+	    {_, { _, _, Reply}} = wait_reply(Socket),
+	    %io:format("~p~n", [Reply]),
+	    gen_tcp:close(Socket),
+	    binary_to_list(Reply);
 	_ ->
 	    error
     end.

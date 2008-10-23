@@ -23,12 +23,12 @@ loop(Socket) ->
 			[Metodo,Recurso|_] = string:tokens(Request, " "),
 			if
 				(Metodo == "GET") -> 
-					{Response, New_header, BodyPage} = readResource(Recurso),
+					{Response, New_header, BodyPage} = readResource(Recurso, Input),
 					io:format(Response, [New_header, BodyPage]),
 					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
 				(Metodo == "POST") -> 
-					{Response, New_header, BodyPage} = readResource(Recurso),
-					io:format(Response, [New_header, BodyPage]),
+					{Response, New_header, BodyPage} = readResource(Recurso, Input),
+					%io:format(Response, [New_header, BodyPage]),
 					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
 				(Metodo /= "GET") or (Metodo /= "POST") -> 
 					ArchivoPagina = leerConfig(pagina405),
@@ -57,18 +57,48 @@ set_content_type(Extension)->
 		true -> ["\n"]
 	end.
 	
-readResource(Recurso)	->
-	% en _  van los parametros
-	[Name, Extension|_] = evalResource(Recurso),
-	New_header = set_content_type(Extension),
-	Root = leerConfig(root),
-	Archivo = Root ++ Name ++ "." ++ Extension,
-	BodyPage = buscarArchivo(Archivo),
-	TemplatePagina = formarPagina(BodyPage, Archivo),
-	%New_header2 = tamaArchivo(New_header, Archivo),
-	io:format("Root; ~s, Name: ~s, Extension: ~s",[Root, Name, Extension]),
-	{TemplatePagina, New_header, BodyPage}.
+readResource(Recurso, Input)	->
+	[Name, Extension|Parametros] = evalResource(Recurso),
+	if 
+		Extension == controlador	->
+			[Param] = Parametros,
+			recursoDinamico(Name, Param, Input);
+		true	-> recursoEstatico(Name, Extension) 
+	end.
 
+recursoDinamico(Name, Parametros, Input)	->
+	[Modulo, Funtion |_] = string:tokens(Name, [$/]),
+	io:format("Modulo; ~s, Function: ~s, Parametros: ~s~n",[Modulo, Funtion, Parametros]),
+	%io:format("Input; ~s",[Input]),
+	Listaparametros = listParams(Parametros),
+	Response = "HTTP/1.0 200 OK\n~s\n~s",
+	Index = string:str(Input, "\r\n"),
+	Index2 = string:str(Input, "\r\n\r\n"),
+	Headlist = string:sub_string(Input, Index+2, Index2-1),
+	%io:format("Hlist ~s~n~n", [Headlist]),
+	Hlist = listaHead(string:tokens(Headlist, "\r\n"), []),
+	% Esto no se puede imprimir asiio:format("Hlist ~s~n~n", [Hlist]),
+	{Response, Hlist, "hola"}.
+	
+listaHead("",Result)	-> lists:reverse(Result);
+listaHead([A|B], Result)	->
+	Index = string:str(A, ":"),
+	{Hname, Hvalue}= lists:split(Index, A),
+	listaHead(B, [{Hname, Hvalue}|Result]).
+	
+listParams([])	-> [];
+listParams(Parametros)	->
+	params(string:tokens(Parametros, [$&]), []).
+
+params("", Result)	->  lists:reverse(Result);
+params([A|B], Result)	->
+	Index = string:rchr(A, $=),
+	%io:format("A; ~s, B: ,~s Index: ~p~n", [A, B, Index]),
+	{Variable, Vigual} = lists:split(Index-1, A),
+	{_, Valor} = lists:split(1, Vigual),
+	%io:format("Variable ~s, Valor ~s ~n", [Variable, Valor]),
+	params(B,[{Variable, Valor}|Result]).
+	
 %tamaArchivo(Header, Archivo)	->
 %no se como cachar lo del archivo
 %	case file:read_file_info(Archivo) of
@@ -78,15 +108,26 @@ readResource(Recurso)	->
 %		_ 	->
 %			Header
 %	end.
+
+recursoEstatico(Name, Extension)	->
+	New_header = set_content_type(Extension),
+	Root = leerConfig(root),
+	Archivo = Root ++ Name ++ "." ++ Extension,
+	BodyPage = buscarArchivo(Archivo),
+	TemplatePagina = formarPagina(BodyPage, Archivo),
+	%New_header2 = tamaArchivo(New_header, Archivo),
+	io:format("Root; ~s, Name: ~s, Extension: ~s",[Root, Name, Extension]),
+	{TemplatePagina, New_header, BodyPage}.
 	
 evalResource(Recurso)	->
-	A = string:rchr(Recurso, $.),
+	[Fuente|_] = string:tokens(Recurso, [$?]),
+	A = string:rchr(Fuente, $.),
 	if
 		(A == 0)	->
 			[Name|Parametros]	= string:tokens(Recurso, [$?]),
-			[Name, "html"|Parametros];
+			[Name, controlador|Parametros];
 		true	->
-			string:tokens(Recurso, [$., $?])
+			string:tokens(Recurso, [$. , $?])
 	end.
 	
 formarPagina(BodyPagina, Archivo)	->
@@ -109,7 +150,7 @@ leerConfig(Atom)	->
 		Val = leerArch(S, Atom),
 		file:close(S),
 		Val;
-	{error, Why}	->
+	{error, _}	->
 		"Archivo de configuracion no encontrado"
 	end.
 	
