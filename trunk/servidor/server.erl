@@ -1,5 +1,5 @@
 -module(server).
--export([inicio/0]).
+-export([inicio/0, listParams/1, listaHead/2]).
 
 inicio() -> 
     Port = leerConfig(port),
@@ -93,10 +93,10 @@ listParams(Parametros)	->
 params("", Result)	->  lists:reverse(Result);
 params([A|B], Result)	->
 	Index = string:rchr(A, $=),
-	%io:format("A; ~s, B: ,~s Index: ~p~n", [A, B, Index]),
+	io:format("A; ~s, B: ,~p Index: ~p~n", [A, B, Index]),
 	{Variable, Vigual} = lists:split(Index-1, A),
 	{_, Valor} = lists:split(1, Vigual),
-	%io:format("Variable ~s, Valor ~s ~n", [Variable, Valor]),
+	io:format("Variable ~s, Valor ~s ~n", [Variable, Valor]),
 	params(B,[{Variable, Valor}|Result]).
 	
 %tamaArchivo(Header, Archivo)	->
