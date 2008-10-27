@@ -4,4 +4,4 @@
 {pagina404, "/home/adrian/erl-flush/servidor/pagina404.html"}.
 {pagina405, "/home/adrian/erl-flush/servidor/pagina405.html"}.
 {controller_root , "/home/adrian/erl_flush/ctrl" }.
-{view_root, "/home/adrian/erl-flush/views"}.
+{view_root, "/home/adrian/erl-flush/views/"}.

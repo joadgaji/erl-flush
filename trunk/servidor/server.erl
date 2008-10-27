@@ -3,6 +3,8 @@
 
 inicio() -> 
     Port = leerConfig(port),
+    Rootctrl = leerConfig(controller_root),
+    code:add_path(Rootctrl),
     {ok, Listen} = gen_tcp:listen(Port, [binary, {packet, 0}, {reuseaddr, true}, {active, false}]),    
     io:format("Erl-FlushServer Ver. 0.1~n(C) by Erl-Flush Team, 2008.~n"),
     accept(Listen).
@@ -24,7 +26,7 @@ loop(Socket) ->
 			if
 				(Metodo == "GET") -> 
 					{Response, New_header, BodyPage} = readResource(Recurso, Input),
-					io:format(Response, [New_header, BodyPage]),
+					%io:format(Response, [New_header, BodyPage]),
 					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
 				(Metodo == "POST") -> 
 					{Response, New_header, BodyPage} = readResource(Recurso, Input),
@@ -76,15 +78,20 @@ recursoDinamico(Name, Parametros, Input)	->
 	Index2 = string:str(Input, "\r\n\r\n"),
 	Headlist = string:sub_string(Input, Index+2, Index2-1),
 	%io:format("Hlist ~s~n~n", [Headlist]),
-	Hlist = listaHead(string:tokens(Headlist, "\r\n"), []),
+	Hlist = [] ,% listaHead(string:tokens(Headlist, "\r\n"), []),
 	% Esto no se puede imprimir asiio:format("Hlist ~s~n~n", [Hlist]),
-	{Response, Hlist, "hola"}.
+	{ValPlantilla, HeaderResponse} = apply(list_to_atom(Modulo), list_to_atom(Funtion), [Listaparametros, Hlist]),
+	Rootviews = leerConfig(view_root),
+	io:format("PAgina; ~s~n", [Rootviews]),
+	PaginaHtml = peval:principal(Rootviews ++ Funtion ++ ".html", ValPlantilla),
+	{Response, Hlist, PaginaHtml}.
 	
 listaHead("",Result)	-> lists:reverse(Result);
 listaHead([A|B], Result)	->
 	Index = string:str(A, ":"),
 	{Hname, Hvalue}= lists:split(Index, A),
-	listaHead(B, [{Hname, Hvalue}|Result]).
+	Len = string:len(Hname),
+	listaHead(B, [{string:sub_string(Hname, 1, Len -1 ), Hvalue}|Result]).
 	
 listParams([])	-> [];
 listParams(Parametros)	->
@@ -97,7 +104,7 @@ params([A|B], Result)	->
 	{Variable, Vigual} = lists:split(Index-1, A),
 	{_, Valor} = lists:split(1, Vigual),
 	io:format("Variable ~s, Valor ~s ~n", [Variable, Valor]),
-	params(B,[{Variable, Valor}|Result]).
+	params(B,[{list_to_atom(Variable), Valor}|Result]).
 	
 %tamaArchivo(Header, Archivo)	->
 %no se como cachar lo del archivo
