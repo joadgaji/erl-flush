@@ -1,4 +1,4 @@
-pruebas: test_comment.beam test_parser.beam test_lexer1.beam test_lexer2.beam test_lexer2.beam\
+pruebas: test_comment.beam test_parser.beam test_lexer1.beam test_lexer2.beam test_lexer2.beam test_lexer3.beam\
 	test_eval.beam test_peval.beam test_servidor.beam
 	
 test_lexer1.beam : test_lexer1.erl

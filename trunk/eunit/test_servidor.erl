@@ -71,3 +71,6 @@ error404_test_() ->
 
 error405_test_() ->
     [?_assert(test1(8800, "TRACE /forma.html HTTP/1.0") == "HTTP/1.0 405 Method Not Allowed\nServer: StupidErlangServer/0.1\nContent-Type: text/html; charset=ISO-8859-1\nAllow: GET, POST\n\n<html>\n  <head>\n    <title>405 Method Not Allowed</title>\n    <style type='text/css'>\n      body {\n        background-color: white;       \n        font-family: sans-serif;\n        font-size: medium;\n        padding: 20px;\n      }\n      pre {\n        margin: 0px 20px;\n        padding: 20px;\n        border: 1px solid #000000;\n        background-color: #eeeeee;\n      }\n    </style>\n  </head>\n  <body>\n    <h1>405 Method Not Allowed</h1>\n\tEl metodo especificado en la linea de peticion no esta permitido para el recurso identificado por la solicitud. \n\t\n  </body>\n</html>\n")].
+   
+fact_test_()	->
+	[?_assert(cliente:test1(8800, "GET /prueba/fact?x=5&y=10 HTTP/1.0")=="HTTP/1.0 200 OK\n\n<html>\n<body>\n120\n<br>\n3628800\n</body>\n</html>")].

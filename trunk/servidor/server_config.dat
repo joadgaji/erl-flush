@@ -3,5 +3,6 @@
 {pagina200, "/home/adrian/erl-flush/servidor/pagina200.html"}.
 {pagina404, "/home/adrian/erl-flush/servidor/pagina404.html"}.
 {pagina405, "/home/adrian/erl-flush/servidor/pagina405.html"}.
-{controller_root , "/home/adrian/erl_flush/ctrl" }.
+{index, "/home/adrian/erl-flush/resources/index.html"}.
+{controller_root , "/home/adrian/erl-flush/ctrl" }.
 {view_root, "/home/adrian/erl-flush/views/"}.

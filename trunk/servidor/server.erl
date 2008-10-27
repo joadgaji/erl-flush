@@ -1,10 +1,13 @@
 -module(server).
--export([inicio/0, listParams/1, listaHead/2]).
-
+%-export([inicio/0, listParams/1, listaHead/2, stringHeaders/2]).
+-compile(export_all).
+-import(ascii, [listParams/1]).
 inicio() -> 
     Port = leerConfig(port),
     Rootctrl = leerConfig(controller_root),
     code:add_path(Rootctrl),
+    code:add_path("."),
+    code:add_path(".."),
     {ok, Listen} = gen_tcp:listen(Port, [binary, {packet, 0}, {reuseaddr, true}, {active, false}]),    
     io:format("Erl-FlushServer Ver. 0.1~n(C) by Erl-Flush Team, 2008.~n"),
     accept(Listen).
@@ -24,12 +27,16 @@ loop(Socket) ->
 			[Request|_] = string:tokens(Input, "\r\n"),
 			[Metodo,Recurso|_] = string:tokens(Request, " "),
 			if
+				%(Metodo == "GET")	and (Recurso == "/")->
+				%	ArchivoPagina = leerConfig(index),
+				%	{ok, Pagina} = file:read_file(ArchivoPagina),
+				%	gen_tec:send(Socket, [io_lib:format(binary_to_list(Pagina), ["\n"])]);
 				(Metodo == "GET") -> 
 					{Response, New_header, BodyPage} = readResource(Recurso, Input),
 					%io:format(Response, [New_header, BodyPage]),
 					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
 				(Metodo == "POST") -> 
-					{Response, New_header, BodyPage} = readResource(Recurso, Input),
+					{Response, New_header, BodyPage} = readPostResource(Recurso, Input),
 					io:format("Response ~s~n ", [Input]),
 					%io:format(Response, [New_header, BodyPage]),
 					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
@@ -69,23 +76,44 @@ readResource(Recurso, Input)	->
 		true	-> recursoEstatico(Name, Extension) 
 	end.
 
+	
+readPostResource(Recurso, Input)	->
+	[Name, Extension|_] = evalResource(Recurso),
+	Parametros = [get_params_post(Input)],
+	io:format("PARA; ~s",[Parametros]),
+	if 
+		Extension == controlador	->
+			[Param] = Parametros,
+			recursoDinamico(Name, Param, Input);
+		true	-> recursoEstatico(Name, Extension) 
+	end.
+	
 recursoDinamico(Name, Parametros, Input)	->
 	[Modulo, Funtion |_] = string:tokens(Name, [$/]),
 	io:format("Modulo; ~s, Function: ~s, Parametros: ~s~n",[Modulo, Funtion, Parametros]),
 	%io:format("Input; ~s",[Input]),
-	Listaparametros = listParams(Parametros),
+	Listaparametros = ascii:listParams(Parametros),
 	Response = "HTTP/1.0 200 OK\n~s\n~s",
 	Index = string:str(Input, "\r\n"),
 	Index2 = string:str(Input, "\r\n\r\n"),
 	Headlist = string:sub_string(Input, Index+2, Index2-1),
 	%io:format("Hlist ~s~n~n", [Headlist]),
-	Hlist = [] ,% listaHead(string:tokens(Headlist, "\r\n"), []),
-	% Esto no se puede imprimir asiio:format("Hlist ~s~n~n", [Hlist]),
-	{ValPlantilla, HeaderResponse} = apply(list_to_atom(Modulo), list_to_atom(Funtion), [Listaparametros, Hlist]),
+	Hlist = listaHead(string:tokens(Headlist, "\r\n"), []),
+	%io:format("Hlist ~p~n~n", [Hlist]),
+	{ValPlantilla, HeaderPlantilla} = apply(list_to_atom(Modulo), list_to_atom(Funtion), [Listaparametros, Hlist]),
+	io:format("valplantilla ~p~n headerplantilla~p~n", [ValPlantilla, HeaderPlantilla]),
 	Rootviews = leerConfig(view_root),
-	io:format("PAgina; ~s~n", [Rootviews]),
-	PaginaHtml = peval:principal(Rootviews ++ Funtion ++ ".html", ValPlantilla),
-	{Response, Hlist, PaginaHtml}.
+	PaginaHtml = peval:principal(Rootviews  ++ Funtion ++ ".html", ValPlantilla),
+	io:format("PAgina; ~s~n", [PaginaHtml]),
+	%Headlist =  stringHeaders(HeaderPlantilla, ""),
+	%io:format("Headers ~s ~n", [Headlist]),
+	{Response, "Accept: Mozilla\n", PaginaHtml}.
+	
+stringHeaders([], "")	-> "";
+stringHeaders("", Result)	-> Result;
+stringHeaders([{A, B}|C], Result)	->
+	io:format("A, ~p  B, ~p ~n", [A, B]),
+	stringHeaders(C, A ++ ":" ++ B ++ "\n" ++ Result).
 	
 listaHead("",Result)	-> lists:reverse(Result);
 listaHead([A|B], Result)	->
@@ -94,9 +122,9 @@ listaHead([A|B], Result)	->
 	Len = string:len(Hname),
 	listaHead(B, [{string:sub_string(Hname, 1, Len -1 ), Hvalue}|Result]).
 	
-listParams([])	-> [];
-listParams(Parametros)	->
-	params(string:tokens(Parametros, [$&]), []).
+%listParams([])	-> [];
+%listParams(Parametros)	->
+%	params(string:tokens(Parametros, [$&]), []).
 
 params("", Result)	->  lists:reverse(Result);
 params([A|B], Result)	->
@@ -106,6 +134,12 @@ params([A|B], Result)	->
 	{_, Valor} = lists:split(1, Vigual),
 	io:format("Variable ~s, Valor ~s ~n", [Variable, Valor]),
 	params(B,[{list_to_atom(Variable), Valor}|Result]).
+	
+
+get_params_post(Input) ->
+	Index2 = string:str(Input, "\r\n\r\n"),
+	Parametros = string:sub_string(Input, Index2+4, string:len(Input)-2),
+	Parametros.
 	
 %tamaArchivo(Header, Archivo)	->
 %no se como cachar lo del archivo
