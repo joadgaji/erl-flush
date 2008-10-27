@@ -19,3 +19,5 @@
 || 12-Oct-2008 || 5 hrs || Luna, Adrian, Malto, Mary y Mamachuy ||  Activar los puertos || Elaboración del Servidor Web y su archivo de Configuración. ||
 || 15-Oct-2008 || 2.5 hrs || Luna, Adrian, Malto, Mary y Mamachuy ||  - || Corregir detalles. Hacer un cliente para el servidor y ayude en las pruebas. Incluir metodo POST al servidor y mandar error 405 si no es un metodo valido (GET o POST). ||
 || 16-Oct-2008 || 1.5 hrs || Adrian y Mamachuy ||  Problemas para leer la informacion de los archivos || Actualizar el make, corregir detalles del servidor ||
+|| 21-Oct-2008 || 3 hrs ||  Adrian, Mary, Malto,Luna y Mamachuy  ||  La localizacion del modulo que recibe apply || Modificaciones al servidor, creacion del controlador y carpetas ctrl y views ||
+|| 26-Oct-2008 || 6 hrs ||  Adrian, Mary, Malto,Luna y Mamachuy  || - || Modificaciones al controlador y al servidor para recibir la lista de parametros con metodo POST. Modificar el make por la localizacion de archivos compilados (.beam)||
