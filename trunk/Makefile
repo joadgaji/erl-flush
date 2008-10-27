@@ -1,14 +1,15 @@
 pruebas :  comment.beam lexer1.beam lexer2.beam lexer3.beam parser.beam exp_eval.beam peval.beam\
 		server.beam cliente.beam\
-		test_comment.beam test_lexer1.beam test_lexer2.beam test_lexer3.beam test_parser.beam test_eval.beam test_peval.beam test_servidor.beam
-	erl -noshell -s test_comment test -s init stop
-	erl -noshell -s test_lexer1 test -s init stop
-	erl -noshell -s test_lexer2 test -s init stop
-	erl -noshell -s test_lexer3 test -s init stop
-	erl -noshell -s test_parser test -s init stop
-	erl -noshell -s test_eval test -s init stop
-	erl -noshell -s test_peval test -s init stop 
-	erl -noshell -s test_servidor test -s init stop
+		tests_subdirs
+	erl -noshell -s eunit/test_comment test -s init stop
+	erl -noshell -s eunit/test_lexer1 test -s init stop
+	erl -noshell -s eunit/test_lexer2 test -s init stop
+	erl -noshell -s eunit/test_lexer3 test -s init stop
+	erl -noshell -s eunit/test_parser test -s init stop
+	erl -noshell -s eunit/test_eval test -s init stop
+	erl -noshell -s eunit/test_peval test -s init stop 
+	erl -noshell -s eunit/test_servidor test -s init stop
+	
 lexer1.beam : lexer1.erl
 	erlc lexer1.erl
 
@@ -36,8 +37,10 @@ server.beam : servidor/server.erl
 cliente.beam : servidor/cliente.erl
 	erlc servidor/cliente.erl
 
-subdirs :
-	cd eunit; make
+
+
+tests_subdirs :
+	cd eunit : pruebas
 
 test_comment.beam : eunit/test_comment.erl
 	erlc eunit/test_comment.erl
@@ -63,7 +66,10 @@ test_peval.beam : eunit/test_peval.erl
 test_servidor.beam : eunit/test_servidor.erl
 	erlc eunit/test_servidor.erl
 
-clean : borra pruebas
+clean : 
+	borra pruebas
+	cd eunit : make clean
 	
 borra : 
 	rm *.beam
+	cd eunit : make borra

@@ -30,6 +30,7 @@ loop(Socket) ->
 					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
 				(Metodo == "POST") -> 
 					{Response, New_header, BodyPage} = readResource(Recurso, Input),
+					io:format("Response ~s~n ", [Input]),
 					%io:format(Response, [New_header, BodyPage]),
 					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
 				(Metodo /= "GET") or (Metodo /= "POST") -> 
