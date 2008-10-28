@@ -73,13 +73,15 @@ error405_test_() ->
     [?_assert(test1(8800, "TRACE /forma.html HTTP/1.0") == "HTTP/1.0 405 Method Not Allowed\nServer: StupidErlangServer/0.1\nContent-Type: text/html; charset=ISO-8859-1\nAllow: GET, POST\n\n<html>\n  <head>\n    <title>405 Method Not Allowed</title>\n    <style type='text/css'>\n      body {\n        background-color: white;       \n        font-family: sans-serif;\n        font-size: medium;\n        padding: 20px;\n      }\n      pre {\n        margin: 0px 20px;\n        padding: 20px;\n        border: 1px solid #000000;\n        background-color: #eeeeee;\n      }\n    </style>\n  </head>\n  <body>\n    <h1>405 Method Not Allowed</h1>\n\tEl metodo especificado en la linea de peticion no esta permitido para el recurso identificado por la solicitud. \n\t\n  </body>\n</html>\n")].
    
 fact_test_()	->
-	[?_assert(cliente:test1(8800, "GET /prueba/fact?x=5&y=10 HTTP/1.1")=="HTTP/1.0 200 OK\nContent-type: text/html\n\n<html>\r\n\t<body>\r\n\t\t120\r\n\t\t<br>\r\n\t\t3628800\r\n\t</body>\r\n</html>")].
+	[?_assert(cliente:test1(8800, "GET /prueba/fact?x=5&y=10 HTTP/1.1")=="HTTP/1.0 200 OK\nServer:Erl-flush\r\nContent-type:text/plain\r\n\n<html>\r\n\t<body>\r\n\t\t120\r\n\t\t<br>\r\n\t\t3628800\r\n\t</body>\r\n</html>"
+)].
 	
 parametros_post_test_() ->
-	[?_assert(cliente:test1(8800, "POST /forma/eval HTTP/1.0\r\n\r\nuser=maricela\r\n") == "HTTP/1.0 200 OK\nContent-type: text/html\n\n<html>\r\n\t<body>\r\n\t\tmaricela\r\n\r\n\t</body>\r\n</html>")].
+	[?_assert(cliente:test1(8800, "POST /forma/eval HTTP/1.0\r\n\r\nuser=maricela\r\n") == "HTTP/1.0 200 OK\nContent-Type:text/html\r\nAllow:GET,POST\r\nServer:Erl-flush/1.0\r\n\n<html>\r\n\t<body>\r\n\t\tmaricela\r\n\r\n\t</body>\r\n</html>"
+)].
 	
 lheaders_test_() ->
-	[?_assert(server:listaHead(string:tokens("Accept: application/html\r\nContent-type: text/html\r\n", "\r\n"), "") == [{"Accept", " application/html"}, {"Content-type" , " text/html"}])].
+	[?_assert(server:listsHead1(["Accept: application/html", "Content-type: text/html"]) == [{"Accept", " application/html"}, {"Content-type" , " text/html"}])].
 	
 stringHead_test_()	->
-	[?_assert(server:stringHeaders([{"Accept"," application/html"},{"Content-type"," text/html"}], "")== "Accept: application/html\r\nContent-type: text/html\r\n")].
+	[?_assert(server:stringHeaders1([{"Accept"," application/html"},{"Content-type"," text/html"}])== "Accept: application/html\r\nContent-type: text/html\r\n")].

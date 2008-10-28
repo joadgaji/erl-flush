@@ -90,7 +90,7 @@ readPostResource(Recurso, Input)	->
 	
 recursoDinamico(Name, Parametros, Input)	->
 	[Modulo, Funtion |_] = string:tokens(Name, [$/]),
-	io:format("Modulo; ~s, Function: ~s, Parametros: ~s~n",[Modulo, Funtion, Parametros]),
+	%io:format("Modulo; ~s, Function: ~s, Parametros: ~s~n",[Modulo, Funtion, Parametros]),
 	%io:format("Input; ~s",[Input]),
 	Listaparametros = ascii:listParams(Parametros),
 	Response = "HTTP/1.0 200 OK\n~s\n~s",
@@ -100,46 +100,55 @@ recursoDinamico(Name, Parametros, Input)	->
 		Index == Index2	-> Headlist= [];
 		true	-> Headlist = string:sub_string(Input, Index+2, Index2-1)
 	end,
-	%io:format("Hlist ~s~n~n", [Headlist]),
-	Hlist = listaHead(string:tokens(Headlist, "\r\n"), []),
-	%io:format("Hlist ~p~n~n", [Hlist]),
+	io:format("Headlist ~p~n~n", [Headlist]),
+	Tokens = string:tokens(Headlist, "\r\n"),
+	io:format("Tokens ~p~n~n", [Tokens]),
+	Hlist = listsHead1(Tokens),
+	io:format("Hlist ~p~n~n", [Hlist]),
 	{ValPlantilla, HeaderPlantilla} = apply(list_to_atom(Modulo), list_to_atom(Funtion), [Listaparametros, Hlist]),
-	io:format("valplantilla ~p~n headerplantilla~p~n", [ValPlantilla, HeaderPlantilla]),
+	io:format("valplantilla \"~p\"~n~nheaderplantilla\"~p\"~n~n", [ValPlantilla, HeaderPlantilla]),
 	Rootviews = leerConfig(view_root),
 	PaginaHtml = peval:principal(Rootviews  ++ Funtion ++ ".html", ValPlantilla),
-	%io:format("PAgina; ~p~n", [PaginaHtml]),
-	io:format("Header a plantilla; ~p~n", [HeaderPlantilla]),
-	%Headlist =  stringHeaders(HeaderPlantilla, ""),
-	%io:format("Headers ~s ~n", [Headlist]),
-	io:format("HTTP/1.0 200 OK\n~p\n~p", ["Content-type: text/html\n", PaginaHtml]),
-	{Response,"Content-type: text/html\n", PaginaHtml}.
+	Cabezalist =  stringHeaders1(HeaderPlantilla),
+	%io:format("Headers ~p ~n", [Headlist]),
+	%io:format("HTTP/1.0 200 OK\n~p\n~p", ["Content-type: text/html\n", PaginaHtml]),
+	{Response,Cabezalist, PaginaHtml}.
 	
-stringHeaders([], Result)	-> Result;
+stringHeaders1(Header)	->
+	NewHeader = Header ++ [{final, fin}],
+	io:format("A~p,",[NewHeader]),
+	stringHeaders(NewHeader, []).
+	
 stringHeaders([{A, B}|C], Result)	->
-	%io:format("A, ~p  B, ~p ~n", [A, B]),
-	P1 = string:concat(A, ":"),
-	P2 = string:concat(B, "\r\n"),
-	P3 = string:concat(P1, P2),
-	stringHeaders(C, string:concat(Result, P3)).
+io:format("Entre", []),
+	if
+		A == final	-> io:format("Result~p", [Result]),
+					Result;
+		true	-> Lista = lists:append([A, [$:], B, "\r\n"]),
+		io:format("A~p, B,~p",[A, B]),
+		stringHeaders(C, Result ++ Lista)
+	end.
 	
-listaHead("",Result)	-> lists:reverse(Result);
+listsHead1(Head)	-> 
+	NewHead= Head ++ ["final"],
+	listaHead(NewHead, []).
+	
 listaHead([A|B], Result)	->
-	Index = string:str(A, ":"),
-	{Hname, Hvalue}= lists:split(Index, A),
-	Len = string:len(Hname),
-	listaHead(B, [{string:sub_string(Hname, 1, Len -1 ), Hvalue}|Result]).
+	if
+		A == "final"	-> lists:reverse(Result);
+		true	->Index = string:str(A, ":"),
+		{Hname, Hvalue}= lists:split(Index, A),
+		Len = string:len(Hname),
+		listaHead(B, [{string:sub_string(Hname, 1, Len -1 ), Hvalue}|Result])
+	end.
 	
-%listParams([])	-> [];
-%listParams(Parametros)	->
-%	params(string:tokens(Parametros, [$&]), []).
-
 params("", Result)	->  lists:reverse(Result);
 params([A|B], Result)	->
 	Index = string:rchr(A, $=),
-	io:format("A; ~s, B: ,~p Index: ~p~n", [A, B, Index]),
+	%io:format("A; ~s, B: ,~p Index: ~p~n", [A, B, Index]),
 	{Variable, Vigual} = lists:split(Index-1, A),
 	{_, Valor} = lists:split(1, Vigual),
-	io:format("Variable ~s, Valor ~s ~n", [Variable, Valor]),
+	%io:format("Variable ~s, Valor ~s ~n", [Variable, Valor]),
 	params(B,[{list_to_atom(Variable), Valor}|Result]).
 	
 
