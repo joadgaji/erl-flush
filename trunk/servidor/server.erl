@@ -27,13 +27,13 @@ loop(Socket) ->
 			[Request|_] = string:tokens(Input, "\r\n"),
 			[Metodo,Recurso|_] = string:tokens(Request, " "),
 			if
-				%(Metodo == "GET")	and (Recurso == "/")->
-				%	ArchivoPagina = leerConfig(index),
-				%	{ok, Pagina} = file:read_file(ArchivoPagina),
-				%	gen_tec:send(Socket, [io_lib:format(binary_to_list(Pagina), ["\n"])]);
+				(Metodo == "GET")	and (Recurso == "/")->
+					ArchivoPagina = leerConfig(index),
+					{ok, Pagina} = file:read_file(ArchivoPagina),
+					gen_tcp:send(Socket, [io_lib:format(binary_to_list(Pagina), ["\n"])]);
 				(Metodo == "GET") -> 
 					{Response, New_header, BodyPage} = readResource(Recurso, Input),
-					%io:format(Response, [New_header, BodyPage]),
+					io:format(Response, [New_header, BodyPage]),
 					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
 				(Metodo == "POST") -> 
 					{Response, New_header, BodyPage} = readPostResource(Recurso, Input),
@@ -96,7 +96,10 @@ recursoDinamico(Name, Parametros, Input)	->
 	Response = "HTTP/1.0 200 OK\n~s\n~s",
 	Index = string:str(Input, "\r\n"),
 	Index2 = string:str(Input, "\r\n\r\n"),
-	Headlist = string:sub_string(Input, Index+2, Index2-1),
+	if 
+		Index == Index2	-> Headlist= [];
+		true	-> Headlist = string:sub_string(Input, Index+2, Index2-1)
+	end,
 	%io:format("Hlist ~s~n~n", [Headlist]),
 	Hlist = listaHead(string:tokens(Headlist, "\r\n"), []),
 	%io:format("Hlist ~p~n~n", [Hlist]),
@@ -104,16 +107,20 @@ recursoDinamico(Name, Parametros, Input)	->
 	io:format("valplantilla ~p~n headerplantilla~p~n", [ValPlantilla, HeaderPlantilla]),
 	Rootviews = leerConfig(view_root),
 	PaginaHtml = peval:principal(Rootviews  ++ Funtion ++ ".html", ValPlantilla),
-	io:format("PAgina; ~s~n", [PaginaHtml]),
+	%io:format("PAgina; ~p~n", [PaginaHtml]),
+	io:format("Header a plantilla; ~p~n", [HeaderPlantilla]),
 	%Headlist =  stringHeaders(HeaderPlantilla, ""),
 	%io:format("Headers ~s ~n", [Headlist]),
-	{Response, "Accept: Mozilla\n", PaginaHtml}.
+	io:format("HTTP/1.0 200 OK\n~p\n~p", ["Content-type: text/html\n", PaginaHtml]),
+	{Response,"Content-type: text/html\n", PaginaHtml}.
 	
-stringHeaders([], "")	-> "";
-stringHeaders("", Result)	-> Result;
+stringHeaders([], Result)	-> Result;
 stringHeaders([{A, B}|C], Result)	->
-	io:format("A, ~p  B, ~p ~n", [A, B]),
-	stringHeaders(C, A ++ ":" ++ B ++ "\n" ++ Result).
+	%io:format("A, ~p  B, ~p ~n", [A, B]),
+	P1 = string:concat(A, ":"),
+	P2 = string:concat(B, "\r\n"),
+	P3 = string:concat(P1, P2),
+	stringHeaders(C, string:concat(Result, P3)).
 	
 listaHead("",Result)	-> lists:reverse(Result);
 listaHead([A|B], Result)	->
@@ -138,7 +145,7 @@ params([A|B], Result)	->
 
 get_params_post(Input) ->
 	Index2 = string:str(Input, "\r\n\r\n"),
-	Parametros = string:sub_string(Input, Index2+4, string:len(Input)-2),
+	Parametros = string:sub_string(Input, Index2+4, string:len(Input)),
 	Parametros.
 	
 %tamaArchivo(Header, Archivo)	->

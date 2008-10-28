@@ -1,5 +1,5 @@
 -module(test_servidor).
--import(serverl, [inicio/0]).
+-import(serverl, [inicio/0, listaHead/2, stringHeaders/2]).
 -import(cliente, [test1/2]).
 -compile(export_all).
 
@@ -11,7 +11,7 @@
 %(C) by Erl-Flush Team, 2008."])].
 
 forma_test_()	->
-	[?_assert(cliente:test1(8800, "GET /forma.html HTTP/1.0")=="HTTP/1.0 200 OK\nServer: erlflussServer/0.1\nContent-type : text/html\n\n<html>\n<body>\n<form name=\"input\" method=\"POST\">\nUsername: \n<input type=\"text\" name=\"user\">\n<input type=\"submit\" value=\"Submit\">\n</form>\n</body>\n</html>\n\n")].
+	[?_assert(cliente:test1(8800, "GET /forma.html HTTP/1.0")=="HTTP/1.0 200 OK\nServer: erlflussServer/0.1\nContent-type : text/html\n\n<html>\n<body>\n<form name=\"input\" method=\"POST\" action=\"forma/eval\">\nUsername: \n<input type=\"text\" name=\"user\">\n<input type=\"submit\" value=\"Submit\">\n</form>\n</body>\n</html>\n\n")].
 
 css_test_() ->
     [?_assert(test1(8800, "GET /deportes.css HTTP/1.0") == "HTTP/1.0 200 OK\nServer: erlflussServer/0.1\nContent-type : text/css\n\n/*Para los titulos de pagina*/\r\n#content H1 { margin-top : 8px; color : #990000;}\r\n/*Para el cuadro de cual es tu equipo*/\r\nDIV.yourTeam {\r\n\tbackground-color : #F7F7F7;\r\n\tbackground : url(../img/img_equipo.gif) no-repeat;\r\n\tborder : solid 1px #B2B2B2;\r\n\t\tpadding : 50px 0 12px 5px;\r\n\ttext-align : center;\r\n}\r\n/*Para el componente de tu equipo (version pequenya)*/\r\nDIV.yourTeam.litleFlags {\r\n\tmargin-bottom:15px; \r\n\tpadding-bottom : 0;\r\n\tbackground-image:url(../img/img_equipo_litle.gif);\r\n}\r\n\r\n/*Para el componente de tu equipo*/\r\nDIV.yourTeam.litleFlags LI{\r\n\twidth : 30px;\r\n\tmargin: 6px 2px 0 0 !important\r\n}\r\n\n")].
@@ -73,4 +73,13 @@ error405_test_() ->
     [?_assert(test1(8800, "TRACE /forma.html HTTP/1.0") == "HTTP/1.0 405 Method Not Allowed\nServer: StupidErlangServer/0.1\nContent-Type: text/html; charset=ISO-8859-1\nAllow: GET, POST\n\n<html>\n  <head>\n    <title>405 Method Not Allowed</title>\n    <style type='text/css'>\n      body {\n        background-color: white;       \n        font-family: sans-serif;\n        font-size: medium;\n        padding: 20px;\n      }\n      pre {\n        margin: 0px 20px;\n        padding: 20px;\n        border: 1px solid #000000;\n        background-color: #eeeeee;\n      }\n    </style>\n  </head>\n  <body>\n    <h1>405 Method Not Allowed</h1>\n\tEl metodo especificado en la linea de peticion no esta permitido para el recurso identificado por la solicitud. \n\t\n  </body>\n</html>\n")].
    
 fact_test_()	->
-	[?_assert(cliente:test1(8800, "GET /prueba/fact?x=5&y=10 HTTP/1.0")=="HTTP/1.0 200 OK\n\n<html>\n<body>\n120\n<br>\n3628800\n</body>\n</html>")].
+	[?_assert(cliente:test1(8800, "GET /prueba/fact?x=5&y=10 HTTP/1.1")=="HTTP/1.0 200 OK\nContent-type: text/html\n\n<html>\r\n\t<body>\r\n\t\t120\r\n\t\t<br>\r\n\t\t3628800\r\n\t</body>\r\n</html>")].
+	
+parametros_post_test_() ->
+	[?_assert(cliente:test1(8800, "POST /forma/eval HTTP/1.0\r\n\r\nuser=maricela\r\n") == "HTTP/1.0 200 OK\nContent-type: text/html\n\n<html>\r\n\t<body>\r\n\t\tmaricela\r\n\r\n\t</body>\r\n</html>")].
+	
+lheaders_test_() ->
+	[?_assert(server:listaHead(string:tokens("Accept: application/html\r\nContent-type: text/html\r\n", "\r\n"), "") == [{"Accept", " application/html"}, {"Content-type" , " text/html"}])].
+	
+stringHead_test_()	->
+	[?_assert(server:stringHeaders([{"Accept"," application/html"},{"Content-type"," text/html"}], "")== "Accept: application/html\r\nContent-type: text/html\r\n")].
