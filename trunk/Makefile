@@ -1,4 +1,4 @@
-pruebas :  comment.beam lexer1.beam lexer2.beam lexer3.beam parser.beam exp_eval.beam peval.beam ascii.beam cliente.beam server.beam libs
+pruebas :  ascii.beam comment.beam lexer1.beam lexer2.beam lexer3.beam parser.beam exp_eval.beam peval.beam ascii.beam cliente.beam server.beam libs
 	erl -noshell -pa eunit -s test_comment test -s init stop
 	erl -noshell -pa eunit -s test_lexer1 test -s init stop
 	erl -noshell -pa eunit -s test_lexer2 test -s init stop
@@ -8,6 +8,8 @@ pruebas :  comment.beam lexer1.beam lexer2.beam lexer3.beam parser.beam exp_eval
 	erl -noshell -pa eunit -s test_peval test -s init stop 
 	erl -noshell -pa eunit -s test_servidor test -s init stop
 
+ascii.beam : ascii.erl
+	erlc ascii.erl
 	
 lexer1.beam : lexer1.erl
 	erlc lexer1.erl

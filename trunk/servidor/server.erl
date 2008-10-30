@@ -32,9 +32,18 @@ loop(Socket) ->
 					{ok, Pagina} = file:read_file(ArchivoPagina),
 					gen_tcp:send(Socket, [io_lib:format(binary_to_list(Pagina), ["\n"])]);
 				(Metodo == "GET") -> 
-					{Response, New_header, BodyPage} = readResource(Recurso, Input),
-					io:format(Response, [New_header, BodyPage]),
-					gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])]);
+					IndexPunto = string:str(Recurso,"."),
+					IndexDiagonal = string:str(string:substr(Recurso,2),"/"),
+					if
+						(IndexPunto == 0) and (IndexDiagonal == 0)->	
+							ArchivoPagina = leerConfig(pagina500),
+							{ok, Pagina} = file:read_file(ArchivoPagina),
+							gen_tcp:send(Socket, [io_lib:format(binary_to_list(Pagina), [""])]);
+						true->
+							{Response, New_header, BodyPage} = readResource(Recurso, Input),
+							%io:format(Response, [New_header, BodyPage]),
+							gen_tcp:send(Socket, [io_lib:format(Response, [New_header, BodyPage])])
+					end;
 				(Metodo == "POST") -> 
 					{Response, New_header, BodyPage} = readPostResource(Recurso, Input),
 					io:format("Response ~s~n ", [Input]),
@@ -93,6 +102,7 @@ recursoDinamico(Name, Parametros, Input)	->
 	%io:format("Modulo; ~s, Function: ~s, Parametros: ~s~n",[Modulo, Funtion, Parametros]),
 	%io:format("Input; ~s",[Input]),
 	Listaparametros = ascii:listParams(Parametros),
+	%io:format("listaparams; ~s",[Listaparametros]),
 	Response = "HTTP/1.0 200 OK\n~s\n~s",
 	Index = string:str(Input, "\r\n"),
 	Index2 = string:str(Input, "\r\n\r\n"),
@@ -105,14 +115,25 @@ recursoDinamico(Name, Parametros, Input)	->
 	io:format("Tokens ~p~n~n", [Tokens]),
 	Hlist = listsHead1(Tokens),
 	io:format("Hlist ~p~n~n", [Hlist]),
-	{ValPlantilla, HeaderPlantilla} = apply(list_to_atom(Modulo), list_to_atom(Funtion), [Listaparametros, Hlist]),
-	io:format("valplantilla \"~p\"~n~nheaderplantilla\"~p\"~n~n", [ValPlantilla, HeaderPlantilla]),
-	Rootviews = leerConfig(view_root),
-	PaginaHtml = peval:principal(Rootviews  ++ Funtion ++ ".html", ValPlantilla),
-	Cabezalist =  stringHeaders1(HeaderPlantilla),
-	%io:format("Headers ~p ~n", [Headlist]),
-	%io:format("HTTP/1.0 200 OK\n~p\n~p", ["Content-type: text/html\n", PaginaHtml]),
-	{Response,Cabezalist, PaginaHtml}.
+	{ValPlantilla, HeaderPlantilla} = applyModFun(list_to_atom(Modulo), list_to_atom(Funtion), [Listaparametros, Hlist]),
+	if 
+		(ValPlantilla == error)  	->
+				ResponseRoot = leerConfig(pagina500),
+				TemplatePagina = buscarArchivo(ResponseRoot),
+				{TemplatePagina, "\n", Modulo};
+		ValPlantilla == 'EXIT'-> 
+				ResponseRoot = leerConfig(pagina404),
+				TemplatePagina = buscarArchivo(ResponseRoot),
+				{TemplatePagina, Headlist ++ "\n", Modulo};
+		true->
+				io:format("valplantilla \"~p\"~n~nheaderplantilla\"~p\"~n~n", [ValPlantilla, HeaderPlantilla]),
+				Rootviews = leerConfig(view_root),
+				PaginaHtml = peval:principal(Rootviews  ++ Funtion ++ ".html", ValPlantilla),
+				Cabezalist =  stringHeaders1(HeaderPlantilla),
+				%io:format("Headers ~p ~n", [Headlist]),
+				%io:format("HTTP/1.0 200 OK\n~p\n~p", ["Content-type: text/html\n", PaginaHtml]),
+				{Response,Cabezalist, PaginaHtml}
+	end.
 	
 stringHeaders1(Header)	->
 	NewHeader = Header ++ [{final, fin}],
@@ -229,4 +250,11 @@ buscarArchivo(Archivo)	->
 	case file:read_file(Archivo) of
 	{ok, Bin}	-> binary_to_list(Bin);
 	{error, _}		-> Archivo
+	end.
+	
+applyModFun(Modulin,Funcioncita,Args)->
+	case catch apply(Modulin,Funcioncita,Args) of
+		{'EXIT', {badarg, _}}	-> {error, badarg};
+		{'EXIT', Why}	-> {'EXIT', Why};
+		{ValorPlantillas, ValorHeaders}-> {ValorPlantillas, ValorHeaders}
 	end.
