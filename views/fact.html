@@ -1,0 +1,31 @@
+<html>
+	<body>
+		{{x}}
+		<br>
+		{% if x < 10%}
+		true
+			{% if x > 20 %}
+			true
+			{{y}}
+			{%else%}
+			false
+			{{x}}
+			{%endif%}
+			hola2
+		{% else %}
+		false
+			{% if x < 20 %}
+			true
+			{{y}}
+			{%else%}
+			false
+			{{x}}
+				{%if x > 5 %}
+				true
+				si se imprime
+				{%endif%}
+			{%endif%}
+			hola3
+		{% endif %}
+	</body>
+</html>
