@@ -134,6 +134,7 @@ recursoDinamico(Name, Parametros, Input)	->
 				%io:format("HTTP/1.0 200 OK\n~p\n~p", ["Content-type: text/html\n", PaginaHtml]),
 				{Response,Cabezalist, PaginaHtml}
 	end.
+
 	
 stringHeaders1(Header)	->
 	NewHeader = Header ++ [{final, fin}],

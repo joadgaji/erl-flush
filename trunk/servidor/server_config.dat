@@ -1,9 +1,10 @@
 {port, 8800}.
-{root, "/home/adrian/erl-flush/resources"}.
-{pagina200, "/home/adrian/erl-flush/servidor/pagina200.html"}.
-{pagina404, "/home/adrian/erl-flush/servidor/pagina404.html"}.
-{pagina405, "/home/adrian/erl-flush/servidor/pagina405.html"}.
-{pagina500, "/home/adrian/erl-flush/servidor/pagina500.html"}.
-{index, "/home/adrian/erl-flush/resources/index.html"}.
-{controller_root , "/home/adrian/erl-flush/ctrl" }.
-{view_root, "/home/adrian/erl-flush/views/"}.
+{root, "C:/Projects/erl-flush/resources"}.
+{pagina200, "C:/Projects/erl-flush/servidor/pagina200.html"}.
+{pagina404, "C:/Projects/erl-flush/servidor/pagina404.html"}.
+{pagina405, "C:/Projects/erl-flush/servidor/pagina404.html"}.
+{pagina500, "C:/Projects/erl-flush/servidor/pagina500.html"}.
+{index, "C:/Projects/erl-flush/resources/index.html"}.
+{controller_root,"C:/Projects/erl-flush/ctrl"}.
+{view_root,"C:/Projects/erl-flush/views/"}.
+

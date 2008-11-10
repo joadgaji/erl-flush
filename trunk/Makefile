@@ -1,4 +1,5 @@
 pruebas :  ascii.beam comment.beam lexer1.beam lexer2.beam lexer3.beam parser.beam exp_eval.beam peval.beam ascii.beam cliente.beam server.beam libs
+
 	erl -noshell -pa eunit -s test_comment test -s init stop
 	erl -noshell -pa eunit -s test_lexer1 test -s init stop
 	erl -noshell -pa eunit -s test_lexer2 test -s init stop
@@ -48,7 +49,7 @@ libs :
 clean : borra pruebas
 
 borra : 
-	rm *.beam
+	del *.beam
 	cd eunit; make borra
 	cd ctrl; make borra
 
