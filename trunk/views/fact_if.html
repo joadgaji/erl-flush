@@ -1,0 +1,31 @@
+<html>
+	<body>
+	
+	x = {{x}}, &nbsp; 
+		{% if x > 20%}
+		y es mayor a 20
+		{% else %}
+		y es menor a 20
+		{%endif%}
+		<br>
+		
+	y = {{y}}, &nbsp;
+		{% if y < 10%}
+		y es menor a 10, &nbsp;
+			{% if y > 0 %}
+			pero es mayor a 0
+			<br>
+			{%endif%}
+		{%else%}
+		y es mayor a 10, &nbsp;
+			{% if y > 100 %}
+			pero es mayor a 100
+			<br>
+			{% else%}
+			pero es menor a 100
+			<br>
+			{% endif%}
+		{%endif%}
+		
+	</body>
+</html>

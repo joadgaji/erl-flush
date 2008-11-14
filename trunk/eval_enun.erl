@@ -10,5 +10,7 @@ principalEnun([H|T], Result, Dic)	->
 	if
 		Enunciado == 'if' -> 
 			eval_if:stateA([H|T],Result, Dic, 1, []);
+		Enunciado == 'for'	->
+			eval_for:stateA([H|T], T, Result, Dic, Dic, []);
 		true -> throw(invalidenun)
 	end.
