@@ -78,6 +78,7 @@ set_content_type(Extension)->
 	
 readResource(Recurso, Input)	->
 	[Name, Extension|Parametros] = evalResource(Recurso),
+	io:format("Parametros~p~n", [Parametros]),
 	if 
 		Extension == controlador	->
 			[Param] = Parametros,
@@ -99,10 +100,10 @@ readPostResource(Recurso, Input)	->
 	
 recursoDinamico(Name, Parametros, Input)	->
 	[Modulo, Funtion |_] = string:tokens(Name, [$/]),
-	%io:format("Modulo; ~s, Function: ~s, Parametros: ~s~n",[Modulo, Funtion, Parametros]),
+	io:format("Modulo; ~s, Function: ~s, Parametros: ~p~n",[Modulo, Funtion, Parametros]),
 	%io:format("Input; ~s",[Input]),
 	Listaparametros = ascii:listParams(Parametros),
-	%io:format("listaparams; ~s",[Listaparametros]),
+	io:format("listaparams; ~p",[Listaparametros]),
 	Response = "HTTP/1.0 200 OK\n~s\n~s",
 	Index = string:str(Input, "\r\n"),
 	Index2 = string:str(Input, "\r\n\r\n"),

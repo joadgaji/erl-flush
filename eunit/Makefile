@@ -1,5 +1,5 @@
 pruebas: test_comment.beam test_parser.beam test_lexer1.beam test_lexer2.beam test_lexer2.beam test_lexer3.beam\
-	test_eval.beam test_peval.beam test_servidor.beam
+	test_eval.beam test_peval.beam test_servidor.beam test_lexer4.beam test_if.beam 
 	
 test_lexer1.beam : test_lexer1.erl
 	erlc test_lexer1.erl
@@ -24,6 +24,12 @@ test_peval.beam : test_peval.erl
 	
 test_servidor.beam : test_servidor.erl
 	erlc test_servidor.erl
+	
+test_lexer4.beam : test_lexer4.erl
+	erlc test_lexer4.erl
+	
+test_if.beam : test_if.erl
+	erlc test_if.erl
 	
 clean : borra pruebas
 
