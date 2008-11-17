@@ -8,12 +8,13 @@
 -import(convert_term, [convert/1]).
 
 stateA([H|T], T2, Result, Dic, DicT, Stkfor)	->
-	
+
 	IteratorExp = {expresion, 1,1, "{{" ++ element(3, H) ++ "}}"},
 	IteratorVal = exp_eval:stateG(lexer3:principal(lexer2:iniciol2(IteratorExp)), Dic),
+	io:format("elemtn : ~p~n~n", [IteratorVal]),
 	Evaluacion = {element(2,H), convert(IteratorVal)},
 	io:format("IteratorVal ~p~n Evaluacion ~p~n", [IteratorVal, Evaluacion]),
-	io:format("H: ~p~n~n T: ~p~n~n DicT: ~p~n~n", [H, T, DicT]),
+	io:format("H: ~p~n~n T: ~p~n~n dic: ~p~n~n DicT: ~p~n~n StkFor~p~n~n", [H, T, Dic, DicT, Stkfor]),
 	stateB(T, T2, Result, Dic, DicT, [Evaluacion|Stkfor]).
 	
 stateB(T, T2, Result, Dic, DicT, [HStk|Stkfor])	->
@@ -26,12 +27,14 @@ stateB(T, T2, Result, Dic, DicT, [HStk|Stkfor])	->
 		(LenValores /= 0) and (LenVariables =< 2) -> 
 			[Variabls,Valors, DicTe] = addDict(Variables, Valores, DicT),
 			%%{VarI, Valor} = {hd(Variables), hd(Valores)},
+			io:format("State B Dic: ~p~n~n Dicte: ~p~n~n Stkfor: ~p~n~n", [Dic, DicTe, Stkfor]),
 			stateC(T, T2, Result, Dic, DicTe, [{Variabls, Valors}|Stkfor]);
 		(LenValores == 0)-> stateD(T, T2, Result, Dic, DicT, Stkfor, 1);
 		true -> "ErrordeVariables"
 	end.
 	
 stateC([H|T], T2, Result, Dic, DicT, Stkfor)	->
+	io:format("State C T: ~p~n~n Dict: ~p~n~n Stkfor: ~p~n~n Result: ~p~n~n", [T, DicT, Stkfor, Result]),
 	if
 		element(1,H) == 'endfor' 	->stateE(T, T2, Result, Dic, DicT, Stkfor);
 		element(1,H) == 'for' 	-> 
@@ -58,14 +61,14 @@ stateD([H|T], T2, Result, Dic, DicT, Stkfor, StkTemp)->
 	end.
 	
 stateE([H|T], T2, Result, Dic, DicT, [HStk|Stkfor])	->
-	{Variables, Valores} = HStk,
-	LenVariables = string:len(Variables),
+	{_, Valores} = HStk,
+	%LenVariables = string:len(Variables),
 	%%io:format("LenVar~p",LenVariables),
 	LenValores = string:len(Valores),
 	if 
 		(Stkfor == []) and (LenValores == 0) 	->	{[H|T], Result};
-		LenValores == 1 -> stateB(T2, T2, Result, Dic, DicT, [HStk|Stkfor]);
-		LenValores >= 0 -> stateB(T2, T2, Result, Dic, DicT, [HStk|Stkfor])
+		LenValores == 0 -> {[H|T], Result};
+		LenValores > 0 -> stateB(T2, T2, Result, Dic, DicT, [HStk|Stkfor])
 	end.
 
 addDict([Var1], [H|T], DicT)-> [[Var1], T, remplazaTuplaEnDicT({list_to_atom(Var1),H},DicT,[])];
