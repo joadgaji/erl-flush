@@ -32,15 +32,15 @@ stateA([H|T], Result) ->
 %%%%%%%%%%%% Aqui me queda duda todavia de como se va a concatenar stateG con el Result
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 stateB([H|T], Result, Dic)	->
-	io:format("~p~n~n", [T]),
-	io:format("Result: ~p~n~n", [Result]),
+	%io:format("~p~n~n", [T]),
+	%io:format("Result: ~p~n~n", [Result]),
 	if 
 		final == element(1, H) -> lists:reverse(Result);
 		('if' == element(1,H)) -> 
 		{T2, Result2}=eval_enun:principalEnun([H|T], Result, Dic),
 		stateB(T2, Result2, Dic);
-		%('for'== element(1,H))	-> {T2, Result2}=eval_enun:principalEnun([H|T], Result, Dic, 0, 1),
-		%stateB(T2, Result2);
+		('for'== element(1,H))	-> {T2, Result2}=eval_enun:principalEnun([H|T], Result, Dic),
+		stateB(T2, Result2, Dic);
 		is_list(H)	-> stateB(T, [stateG(lexer3:principal(H), Dic)|Result], Dic);
 		true 	-> stateB(T, [H|Result],Dic)
 	end.

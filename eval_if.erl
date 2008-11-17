@@ -16,7 +16,7 @@ stateA([H|T], Result, Dic, Stkif, Stkval)->
 stateB([H|T], Result, Dic, Stkif, Stkval)->
 	if 
 		element(1,H) == 'if'-> stateB(T, Result, Dic, Stkif+1, Stkval);
-		(element(1,H) == 'endif') and (Stkif == 1)-> stateB(T, Result, Dic, Stkif, tl(Stkval));
+		(element(1,H) == 'endif') and (Stkif == 1)-> stateF(T, Result, Dic, Stkif, tl(Stkval));
 		element(1,H) == 'endif'-> stateB(T, Result, Dic, Stkif - 1, Stkval);
 		(element(1,H) =='else') and (Stkif ==1)-> stateC(T,Result,Dic, Stkif, Stkval);
 		true->stateB(T, Result, Dic, Stkif, Stkval)
@@ -39,16 +39,16 @@ stateD([H|T], Result, Dic, Stkif, Stkval)->
 		element(1, H) == 'if' -> stateA([H|T], Result, Dic, Stkif, Stkval);
 		element(1, H) == 'else' -> stateE(T, Result, Dic, Stkif, Stkval);
 		element(1, H) == estatico ->
-			io:format("StkVal = ~p~n~n", [Stkval]),
+			%io:format("StkVal = ~p~n~n", [Stkval]),
 		stateD(T, [H|Result] ,Dic, Stkif, Stkval);
 		is_list(H) -> stateD(T, [(exp_eval:stateG(lexer3:principal(H), Dic))|Result], Dic, Stkif, Stkval)
 	end.
 	
 stateE([H|T], Result, Dic, Stkif, Stkval)->
-io:format("H = ~p~n", [H]),
-	io:format("T = ~p~n", [T]),
-	io:format("Res = ~p~n~n", [Result]),
-	io:format("RStkif = ~p~n~n", [Stkif]),
+%io:format("H = ~p~n", [H]),
+%	io:format("T = ~p~n", [T]),
+%	io:format("Res = ~p~n~n", [Result]),
+%	io:format("RStkif = ~p~n~n", [Stkif]),
 	if 
 		(element(1,H) == 'endif') and (Stkif == 1) -> stateF(T, Result, Dic, Stkif, tl(Stkval));
 		element(1,H) == 'endif' -> stateE(T, Result, Dic, Stkif - 1, Stkval);
