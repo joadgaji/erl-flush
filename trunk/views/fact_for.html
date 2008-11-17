@@ -1,23 +1,24 @@
 <html>
 	<body>
-	
-	x = {{x}}, &nbsp; 
 	<table>
-	
 	{%for i in list%}
 	<tr>
-	{%for a in lista%}
+	{%for a in lista %}
+	{%if i == 2%}
+	<td>
+	Hola
+	</td>
+	{% endif%}
+	<td>
+	{{i}}
+	<td>
 	<td>
 	{{a}}
 	</td>
 	{%endfor%}
-	</tr>
+	<tr>
 	{%endfor%}
-
+	
 	</table>
-		<br>
-		
-	y = {{y}}, &nbsp;
-
 	</body>
 </html>
