@@ -8,13 +8,15 @@
 -define(IS_LETTER(X), (?IS_LOWER(X) or ?IS_UPPER(X))).
 -define(IS_SPACE(X), ((X) == $ )).
 -define(IS_SYMBOL(X), ((X) == $+)or ((X) == $-) or ((X) == $*) or ((X) == $/) or ((X) == $=) or 
-	((X) == $%) or ((X) == 40) or ((X) == 41)or ((X) == $<)or ((X) == $>) or ((X) == $[) or ((X) == $])).
+	((X) == $%) or ((X) == $() or ((X) == $))or ((X) == $<)or ((X) == $>) or ((X) == $[) or 
+	((X) == $]) or ((X) == $,) or ((X) == ${) or ((X) == $})).
 
 iniciol2({_,Ren,Col,[_,_|T]})-> stateA(T,Ren,Col+2,[]).
 
 %% Escoge entre los diferentes caractéres posibles
 stateA([H|T],Ren,Col,Result)->
 	if
+		(H == $}) and (hd(T) == $}) 		-> stateK( [H|T],Result);
 		?IS_SPACE(H)	-> stateA(T, Ren, Col + 1, Result);
 		(H == $') 		-> stateB(T, Ren, Col + 1, Result, [H], Ren, Col);
 		(H == $")		-> stateC(T, Ren, Col + 1, Result, [H], Ren, Col);
@@ -22,7 +24,6 @@ stateA([H|T],Ren,Col,Result)->
 		(H == $.)		-> stateE(T, Ren, Col + 1, Result, [H], Ren, Col);
 		?IS_SYMBOL(H) 	-> stateF([H|T], Ren, Col, Result, Ren, Col);
 		?IS_LOWER(H)    -> stateH(T, Ren, Col + 1, Result, [H], Ren, Col);
-		(H == $}) 		-> stateK( [H|T],Result);
 		true 			-> throw(invalidsyntax)
 	end.
 	
@@ -56,7 +57,7 @@ stateD([H|T],Ren,Col,Result, Partial,R,C)->
 stateE([H|T],Ren,Col,Result, Partial,R,C)->
 	if 
 		?IS_DIGIT(H) 					-> stateE(T, Ren, Col+1, Result, [H|Partial], R, C);
-		(H == $}) or					%%	-> stateK([H|T], Result);
+		(H == $}) or
 		?IS_SYMBOL(H) or ?IS_SPACE(H) 	-> stateI([H|T], Ren, Col, Result, Partial, R, C, float);
 		true							-> throw(invalidsyntax)
 	end.
@@ -74,7 +75,7 @@ stateH([H|T],Ren,Col,Result, Partial,R,C)->
 	if 
 		?IS_DIGIT(H) or	?IS_LETTER(H) or (H ==$_) -> stateH(T, Ren, Col + 1, Result, [H|Partial], R, C);      			
 		?IS_SPACE(H) or ?IS_SYMBOL(H) or
-		(H == $})								  -> stateI([H|T], Ren, Col, Result, Partial, R, C, identificador);    
+		(H == $})							  -> stateI([H|T], Ren, Col, Result, Partial, R, C, identificador);    
 		true									  -> throw(invalidsyntax)
 	end.
 
@@ -89,9 +90,9 @@ stateI([H|T], Ren, Col, Result, Partial, R, C, Type)->
 %	end.
 
 %% Estado que revida el stack antes de terminar
-stateK([H|_],Result)->
+stateK([H|T],Result)->
 	if 
-		(H == $}) 	->lists:reverse(Result);
+		(H == $}) and (hd(T) == $}) 	->lists:reverse(Result);
 		true 		-> throw(invalidsyntax)
 	end.
 

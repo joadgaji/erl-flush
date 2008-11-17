@@ -1,5 +1,6 @@
-pruebas :  comment.beam lexer1.beam lexer2.beam lexer3.beam lexer4.beam parser.beam exp_eval.beam peval.beam \
-		ascii.beam cliente.beam server.beam eval_enun.beam eval_if.beam libs
+pruebas :  comment.beam lexer1.beam lexer2.beam lexer3.beam lexer4.beam parser.beam \
+		exp_eval.beam peval.beam ascii.beam cliente.beam server.beam eval_enun.beam \
+		eval_if.beam eval_for.beam convert_term.beam libs
 	erl -noshell -pa eunit -s test_comment test -s init stop
 	erl -noshell -pa eunit -s test_lexer1 test -s init stop
 	erl -noshell -pa eunit -s test_lexer2 test -s init stop
@@ -10,6 +11,7 @@ pruebas :  comment.beam lexer1.beam lexer2.beam lexer3.beam lexer4.beam parser.b
 	erl -noshell -pa eunit -s test_peval test -s init stop 
 	erl -noshell -pa eunit -s test_servidor test -s init stop
 	erl -noshell -pa eunit -s test_if test -s init stop
+	erl -noshell -pa eunit -s test_convert_term test -s init stop
 
 lexer1.beam : lexer1.erl
 	erlc lexer1.erl
@@ -43,6 +45,12 @@ eval_enun.beam : eval_enun.erl
 	
 eval_if.beam : eval_if.erl
 	erlc eval_if.erl
+	
+eval_for.beam : eval_for.erl
+	erlc eval_for.erl
+	
+convert_term.beam : convert_term.erl
+	erlc convert_term.erl
 
 server.beam : servidor/server.erl
 	erlc servidor/server.erl
