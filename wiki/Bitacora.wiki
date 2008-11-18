@@ -25,4 +25,5 @@
 || 27-Oct-2008 || 2 hrs ||  Adrian y Mamachuy  || - || Solucion de problemas con headers.||
 || 28-Oct-2008 || 2.5 hrs ||  Adrian, Mary y Mamachuy  || Escasez de tiempo  || Cachar errores que deberian dar errores http 404 o 500||
 || 30-Oct-2008 || 2 hrs ||  Adrian y Mamachuy  || -  || Separar el controller||
-|| 09-Nov-2008 || 5 hrs ||  Luna, Adrian, Malto, Mary y Mamachuy  || -  || Trabajo sobre las tarjetas 16 y 17, creacion de lexer4, eval_if.||
+|| 09-Nov-2008 || 5 hrs ||  Luna, Adrian, Malto, Mary y Mamachuy  || -  || Trabajo sobre las tarjetas 16 y 17, creacion de lexer4, eval_if. ||
+|| 12-Nov-2008 || 2.5 hrs ||  Mary, Luna, Malto y Mamachuy  || -  || eval_for.||
