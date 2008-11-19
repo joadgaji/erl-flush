@@ -26,6 +26,9 @@ stateC([H|T], Result, Dic, Stkif, Stkval)->
 		element(1,H) == 'endif' -> stateF(T, Result, Dic, Stkif, tl(Stkval));
 		element(1,H) == 'if' -> stateA([H|T], Result, Dic, Stkif, Stkval);
 		element(1,H) == 'estatico' -> stateC(T, [H|Result],Dic, Stkif, Stkval);
+		element(1,H) == 'for'	-> 
+			{T2, Result2} = eval_enun:principalEnun([H|T], Result, Dic),
+			stateC(T2, Result2, Dic, Stkif, Stkval);
 		is_list(H) -> stateC(T, [exp_eval:stateG(lexer3:principal(H), Dic)|Result], Dic, Stkif, Stkval)
 	end.
 	
@@ -41,6 +44,9 @@ stateD([H|T], Result, Dic, Stkif, Stkval)->
 		element(1, H) == estatico ->
 			%io:format("StkVal = ~p~n~n", [Stkval]),
 		stateD(T, [H|Result] ,Dic, Stkif, Stkval);
+		element(1,H) == 'for'	-> 
+			{T2, Result2} = eval_enun:principalEnun([H|T], Result, Dic),
+			stateD(T2, Result2, Dic, Stkif, Stkval);
 		is_list(H) -> stateD(T, [(exp_eval:stateG(lexer3:principal(H), Dic))|Result], Dic, Stkif, Stkval)
 	end.
 	

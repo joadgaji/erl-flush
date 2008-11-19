@@ -12,11 +12,15 @@
 -define(IS_LETTER(X), (?IS_LOWER(X) or ?IS_UPPER(X))).
 
 convert(Exp)	-> 
-	Exp2 = metodo1(Exp ++ [final], []),
-	[H|T] = lexer3:principal(lexer2:iniciol2({expresion, 1,1, "{{" ++ Exp2 ++"}}"})),
+	if 
+		hd(Exp) == $[	-> 
+			[H|T] = lexer3:principal(lexer2:iniciol2({expresion, 1,1, "{{" ++ string:concat(metodo1(Exp ++ [final], []),"}}")}));
+		true	-> [H|T] = Exp
+	end,
+		io:format("H ~p~n T ~p~n", [H, T]),
 	if
 		element(1, H) == '['	-> stateA(T, []);
-		true -> throw(invalidValue)
+		true -> Exp
 	end.
 	
 stateA([H|T], Result) 	->
@@ -84,3 +88,6 @@ metodo2([H|T], Result)	->
 			metodo1(T, [H, 34|Result]);
 		true	-> metodo2(T, [H|Result])
 	end.
+	
+metodomagico([], Result)	-> lists:reverse(tl(Result));
+metodomagico([H|T], Result)	-> metodomagico(T, [$, ,H|Result]).

@@ -11,7 +11,9 @@
 	((X) == $%) or ((X) == $() or ((X) == $))or ((X) == $<)or ((X) == $>) or ((X) == $[) or 
 	((X) == $]) or ((X) == $,) or ((X) == ${) or ((X) == $})).
 
-iniciol2({_,Ren,Col,[_,_|T]})-> stateA(T,Ren,Col+2,[]).
+iniciol2({_,Ren,Col,[_,_|T]})-> 
+io:format("stateA~p~n~n", [T]),
+stateA(T,Ren,Col+2,[]).
 
 %% Escoge entre los diferentes caractéres posibles
 stateA([H|T],Ren,Col,Result)->
