@@ -1,22 +1,16 @@
 <html>
 	<body>
-	<table>
-	{%for i in list%}
+	<table border="1">
+	{%for k,v in lista%}
 	<tr>
-	{%for a in lista %}
-	{%if i == 2%}
-	<td>
-	Hola
-	</td>
-	{% endif%}
-	<td>
-	{{i}}
-	<td>
-	<td>
-	{{a}}
-	</td>
+	<td>{{k}}</td>
+	<td>{{v}}</td>
+	{%for h,i in dic%}
+	<td>{{h}}</td>
+	<td>{{i}}</td>
+	<td>{{h + i}}</td>
 	{%endfor%}
-	<tr>
+	</tr>
 	{%endfor%}
 	
 	</table>
