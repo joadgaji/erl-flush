@@ -64,7 +64,7 @@ stateE([H|T],Ren,Col,Result, Partial,R,C)->
 		true							-> throw(invalidsyntax)
 	end.
 
-%% Revisa caractéres, Incrementa y decrementa el stack de paréntesis
+%% Revisa caractéres
 stateF([H|T],Ren,Col,Result,R,C)->
 	if 
 		%(H == 40)	-> stateI(T, Ren, Col+ 1, Result, [H], R, C, simbolo); 
@@ -91,7 +91,7 @@ stateI([H|T], Ren, Col, Result, Partial, R, C, Type)->
 %		true	-> stateC(T, Ren, Col + 1, Result, [H|Partial], R, C)
 %	end.
 
-%% Estado que revida el stack antes de terminar
+%% Estado que revisa el cierre final de la expresion y que termine en (}})
 stateK([H|T],Result)->
 	if 
 		(H == $}) and (hd(T) == $}) 	->lists:reverse(Result);

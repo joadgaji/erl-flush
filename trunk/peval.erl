@@ -7,7 +7,8 @@ principal(Input, Dic)	->
 	L = exp_eval:principal_eval(Input, Dic),
 	stateA(L ++ [{final}], []).
 	
-%% Por cada elemento de la lista revisa si es elementos estatico, float, integer, o atomo
+%% Por cada elemento de la lista revisa si es elemento estatico, float, integer, o atomo
+%% para despues convertirlo en lo que corresponda
 stateA([H|T], Result)->
 	if
 		(is_tuple(H)) and (element(1, H) == final)	-> Result;

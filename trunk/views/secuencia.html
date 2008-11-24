@@ -1,13 +1,15 @@
 <html>
 	<body>
-		
+		<ul>
 		{%for n in secuencia%}
-			 {{n}}
+			 <li>{{n}}
 			{% if (n%2) == (0) %}
 				Es par
 			{% else %}
 				No es par
 			{% endif %}
+			</li>
 		{%endfor%}
+		</ul>
 	</body>
 </html>

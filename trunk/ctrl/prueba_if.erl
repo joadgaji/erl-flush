@@ -7,5 +7,5 @@ fact_if(Params,_)->
 factorial(0) ->	1;
 factorial(N) -> N * factorial(N-1).
 
-fact_for(Params, Headers)	->
+fact_for(Params, _)	->
 	{Params,[{"Server", "Erl-flush"},{"Content-type", "text/html"}]}.
