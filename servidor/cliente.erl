@@ -4,6 +4,7 @@
 tests(Port,Request) ->
     spawn(fun() -> test1(Port,Request) end).
 
+%% se inicia un cliente para realizar las prubeas necesarias en el framework
 test1(Port,Request) ->
     case gen_tcp:connect("localhost", Port, [binary,{packet, 0}]) of
 	{ok, Socket} ->
@@ -17,8 +18,8 @@ test1(Port,Request) ->
 	    error
     end.
 
-%%"GET /deportes.css HTTP/1.0"
-wait_reply(X) ->
+%% Se espera a la respuesta del servidor en 100000 milisegundos.
+wait_reply(_) ->
     receive
 	Reply ->
 	    {value, Reply}

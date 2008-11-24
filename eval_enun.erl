@@ -5,12 +5,13 @@
 -import(lexer2, [iniciol2/1]).
 -import(lexer3, [principal/1]).
 
+%% Modulo que es llamado cuando se tiene que analizar un if o un for
+
+%% Si lo que llega es un if, se manda al stateA de eval_if
+%% De otrsa manera si es un for se manda al stateA de eval_for
+%% Si llega aldo distinto manda un invalidenun
 principalEnun([H|T], Result, Dic)	->
 	Enunciado = element(1,H),
-				%io:format("H ~p~n~n", [H]),
-			%io:format("T ~p~n~n", [T]),
-			%io:format("Result ~p~n~n", [Result]),
-			%io:format("Dic ~p~n~n", [Dic]),
 	if
 		Enunciado == 'if' -> 
 			eval_if:stateA([H|T],Result, Dic, 1, []);

@@ -1,13 +1,11 @@
 -module(server).
-%-export([inicio/0, listParams/1, listaHead/2, stringHeaders/2]).
 -compile(export_all).
 -import(ascii, [listParams/1]).
+
 inicio() -> 
     Port = leerConfig(port),
     Rootctrl = leerConfig(controller_root),
     code:add_path(Rootctrl),
-    code:add_path("."),
-    code:add_path(".."),
     {ok, Listen} = gen_tcp:listen(Port, [binary, {packet, 0}, {reuseaddr, true}, {active, false}]),    
     io:format("Erl-FlushServer Ver. 0.1~n(C) by Erl-Flush Team, 2008.~n"),
     accept(Listen).
@@ -178,16 +176,6 @@ get_params_post(Input) ->
 	Index2 = string:str(Input, "\r\n\r\n"),
 	Parametros = string:sub_string(Input, Index2+4, string:len(Input)),
 	Parametros.
-	
-%tamaArchivo(Header, Archivo)	->
-%no se como cachar lo del archivo
-%	case file:read_file_info(Archivo) of
-%		{ok, {_, sizefile, _, _, _, _, _, _, _, _, _, _, _, _}}	->
-%			head = "Content-size = " ++ sizefile ++ "\n",
-%			string:concat(Header, head);
-%		_ 	->
-%			Header
-%	end.
 
 recursoEstatico(Name, Extension)	->
 	New_header = set_content_type(Extension),
