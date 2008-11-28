@@ -28,7 +28,7 @@ loop(Socket) ->
 				(Metodo == "GET")	and (Recurso == "/")->
 					ArchivoPagina = leerConfig(index),
 					{ok, Pagina} = file:read_file(ArchivoPagina),
-					gen_tcp:send(Socket, [io_lib:format(binary_to_list(Pagina), ["\n"])]);
+					gen_tcp:send(Socket, [io_lib:format(binary_to_list(Pagina), ["\r\n"])]);
 				(Metodo == "GET") -> 
 					IndexPunto = string:str(Recurso,"."),
 					IndexDiagonal = string:str(string:substr(Recurso,2),"/"),
@@ -78,6 +78,8 @@ readResource(Recurso, Input)	->
 	[Name, Extension|Parametros] = evalResource(Recurso),
 	io:format("Parametros~p~n", [Parametros]),
 	if 
+		(Extension == controlador) and (Parametros == [])	->
+			recursoDinamico(Name, [], Input);
 		Extension == controlador	->
 			[Param] = Parametros,
 			recursoDinamico(Name, Param, Input);
