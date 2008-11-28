@@ -9,10 +9,8 @@
 -import(lexer4, [iniciol4/1]).
 
 
-% Activa el lexer1 que quita comentarios
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%Aqui estoy agregando un Dic, que va a ser el Diccionario de las variables.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Activa el lexer1 que quita comentarios
+%% Recibe el nombre del archivo y una lista de tuplas que es el diccionario de las variables
 principal_eval(Input, Dic) ->
 	R = lexer1:iniciol1(comment:inicio(Input)),
 	S = stateA(R ++ [{final}], []),
@@ -27,10 +25,8 @@ stateA([H|T], Result) ->
 		true -> stateA(T, [H|Result])
 	end.
 
-% Revisa la lista de tuplas de las expresiones para crear nuestra sintaxis para mandar a parser
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%% Aqui me queda duda todavia de como se va a concatenar stateG con el Result
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Revisa la lista de tuplas de las expresiones para crear la sintaxis que necesita el parser mandando llamar lexer 3
+%% Asi mismo aqui se manda a llamar a lexer 4 para evaluar los if y for
 stateB([H|T], Result, Dic)	->
 	%io:format("~p~n~n", [T]),
 	%io:format("Result: ~p~n~n", [Result]),
@@ -45,10 +41,7 @@ stateB([H|T], Result, Dic)	->
 		true 	-> stateB(T, [H|Result],Dic)
 	end.
 
-%Se toma el valor regresado por lexer 3 y se evalua, regresa el resultado de la evaluacion
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%% aqui entra en stateG -> [{entero, 1, 2, 5}, {'+', 1,2}, {entero,1,4, 6}]   y sale un 11.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Se toma el valor regresado por lexer 3 y se manda al parse donde se evalua, mandando este resultado a eval_
 stateG(List, Dic)->
 	case parse(List) of
         {ok, Result} -> 
@@ -61,14 +54,10 @@ stateG(List, Dic)->
                         ++ ", " ++ lists:flatten(List))  
             end                    
     end.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Esto es lo que ya esta corriendo ahorita
-%% para agregar lo de arriba se debe agregar una variaba Dic a eval_ 
-%% Hay errores en el or and xor y esos.. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+	
+%% se evaluan todas las expresiones que se tengan: +,-,*, and, xor, or, etc.
+%% esta funcion tambien sustituye los valores a las variables.
 eval_({X,A,B}, Dic)-> 
 	if
 		is_tuple (A) and is_tuple(B) -> eval_({X,eval_(A,Dic),eval_(B,Dic)});
@@ -89,7 +78,7 @@ eval_(A, _) when is_boolean(A)-> eval_(A);
 eval_(A, Dic) when is_atom(A)-> eval_(eval_atom(A,Dic));
 eval_(A, _) -> eval_(A).
 	
-
+%% Funcion que quita el break de las comillas (el break se usa en los lexer)
 eval_(N) when is_number(N) -> N;
 eval_(N) when is_boolean(N) ->N;
 eval_(N) when is_list(N) -> 
@@ -119,12 +108,14 @@ eval_({'and', A, B}) -> eval_(A) and eval_(B);
 eval_({'xor', A, B}) -> eval_(A) xor eval_(B);
 eval_({'not', A}) -> not A;
 
+%% evalua los index de algun string
 eval_({'[', A, B}) -> 
 	if
 		is_number(A) and is_list(B) -> string:substr(B, A, 1);
 		true-> "error"
 	end;
 		
+%% evalua la longitud de un string
 eval_({'len',A}) ->
 	if
 		is_tuple(A) -> string:len(eval_(A));
@@ -132,7 +123,7 @@ eval_({'len',A}) ->
 		true-> "error"
 	end;
 	
-
+%% concatena strings
 eval_({'++', A, B})->
 	if
 		is_tuple(A) and is_tuple(B) -> eval_(A)++eval_(B);
@@ -152,6 +143,7 @@ eval_({'++', A, B})->
 		true -> "error"
 	end.
 
+%% substituye los valores en las variables
 eval_atom( _, []) 	-> false;
 eval_atom( N, [{X,Value}|T])->
 	if
