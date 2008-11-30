@@ -11,12 +11,18 @@ Este documento describe la instalación del framework erl-flush en un sistema op
 Teniendo un sistema operativo linux, la isntalación es muy sencilla.
 
 Pasos a seguir
-  # Se necesitan las siguientes instalaciones: 
-       * Primeramente se instala el lenguaje de programación Erlang, si no se tiene el archivo de instalación se puede bajar de la siguiente liga http://www.erlang.org/ despues se siguen los pasos que ahi vienen para instalar erlang. 
-       * Instalar también eunit, para que las pruebas de unidad puedan correr, bajar el zip de esta liga (aqui puede ir la liga de ariel)
-  # Ya que se tiene Erlang, se tiene que bajar de esta página en la liga (despues la ponemos) el archivo comprimido en zip llamado (despues lo ponemos).
-  # Se descomprimen los archivos y la carpeta se coloca en el lugar que el usuario más lo deseé.
-  # Después abrimos el archivo llamado *server_config.dat* que se encuentra en la carpeta servidor adentro de nuestro proyecto.
-  # En el archivo server_config.dat se cambian las variables de ambiente entre ellas se escribe la ruta de donde está la carpeta principal, al igual que la carpeta de *views*, *ctrl* y si se requiere se puede cambiar el número de puerto.
-  # Se compila el proyecto para esto abrimos el shell o la consola, nos vamos a la carpeta del proyecto y ejecutamos *$make* (En la primera vez las pruebas de unidad fallan). Después corremos el servidor, para esto abrimos otra ventana de shell, nos posicionamos en la carpeta del proyecto, escribimos *$erl* para ejecutar la consola de erlang y adentro de erlang ponemos *1>server:inicio().* esto hara que el servidor se ejecute. En la primer pantalla ejecutamos nuevamente *$make*, esta vez el todas las pruebas deben de ser exitosas.  
-  # En la carpeta de ctlr y view se ponen las clases para los controladores y en la carpeta views se colocan las vistas o plantillas. Nota: Se puede cambiar o sacar las carpetas de views y ctrl pero se tiene que modificar en el archivo de configurarción (server_config.dat) y las pruebas de unidad van a fallar.
+  # Instalaciones necesarias: 
+     * Erlang: El lenguaje de programacion Erlang se puede bajar de la siguiente liga http://www.erlang.org/ siguiendo los pasos ahi descritos.
+     * Eunit: Utilizado para las pruebas de unidad. Se recomienda bajar de la siguiente liga http://webcem01.cem.itesm.mx:8005/apps/s200813/tc2012/eunit.zip
+  # Descargar Erl-Flush:
+     * Descarga el .zip con el framework de la siguiente liga http://erl-flush.googlecode.com/files/erl-flush.zip
+     * Descomprime los archivos y coloca la carpeta en el lugar que desees (Se recomienda una lugar facil de accesar y recordar).
+  # Modificar la configuracion del servidor:
+     * Abre el archivo llamado *server_config.dat* que se encuentra en la carpeta _erl-flush/servidor_ .
+     * En el archivo server_config.dat cambia las variables de ambiente de acuerdo a la ubicacion que le diste a erl-flush. Sobreescribe las siguientes rutas: carpeta principal, carpeta de *views* y *ctrl*. Si se requiere se puede cambiar el número de puerto.
+  # Correr el servidor:
+     * Compila el proyecto abriendo el shell, colocate en la carpeta de _erl-flush_ y ejecuta *$make*. Las pruebas de unidad fallan deben de fallar. 
+     * Abrie otra ventana de shell, colocate en la carpeta de erl-flush, escribe *$erl* (para ejecutar la consola de erlang) y adentro de erlang teclea *1>server:inicio().* esto hara que el servidor se ejecute. 
+     * Vuelve a ejecutar el *$make* en el shell anterior, esta vez el todas las pruebas deben de ser exitosas.  
+
+Y listo! Ya tienes Erl-Flush en tu computadora.
