@@ -21,8 +21,8 @@ Pasos a seguir
      * Abre el archivo llamado *server_config.dat* que se encuentra en la carpeta _erl-flush/servidor_ .
      * En el archivo server_config.dat cambia las variables de ambiente de acuerdo a la ubicacion que le diste a erl-flush. Sobreescribe las siguientes rutas: carpeta principal, carpeta de *views* y *ctrl*. Si se requiere se puede cambiar el número de puerto.
   # Correr el servidor:
-     * Compila el proyecto abriendo el shell, colocate en la carpeta de _erl-flush_ y ejecuta *$make*. Las pruebas de unidad fallan deben de fallar. 
-     * Abrie otra ventana de shell, colocate en la carpeta de erl-flush, escribe *$erl* (para ejecutar la consola de erlang) y adentro de erlang teclea *1>server:inicio().* esto hara que el servidor se ejecute. 
+     * Compila el proyecto abriendo el shell, colocate en la carpeta de _erl-flush_ y ejecuta *$make*. Las pruebas de unidad deben de fallar. 
+     * Abre otra ventana de shell, colocate en la carpeta de erl-flush, escribe *$erl* (para ejecutar la consola de erlang) y adentro de erlang teclea *1>server:inicio().* esto hara que el servidor se ejecute. 
      * Vuelve a ejecutar el *$make* en el shell anterior, esta vez el todas las pruebas deben de ser exitosas.  
 
 Y listo! Ya tienes Erl-Flush en tu computadora.
