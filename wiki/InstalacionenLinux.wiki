@@ -11,7 +11,9 @@ Este documento describe la instalación del framework erl-flush en un sistema op
 Teniendo un sistema operativo linux, la isntalación es muy sencilla.
 
 Pasos a seguir
-  # Primeramente se instala el lenguaje de programación Erlang, si no se tiene el archivo de instalación se puede bajar de la siguiente liga http://www.erlang.org/ despues se siguen los pasos que ahi vienen para instalar erlang. También se puede escribir la siguiente linea en el shell.  *$sudo apt-get install erlang*
+  # Se necesitan las siguientes instalaciones: 
+       * Primeramente se instala el lenguaje de programación Erlang, si no se tiene el archivo de instalación se puede bajar de la siguiente liga http://www.erlang.org/ despues se siguen los pasos que ahi vienen para instalar erlang. 
+       * Instalar también eunit, para que las pruebas de unidad puedan correr, bajar el zip de esta liga (aqui puede ir la liga de ariel)
   # Ya que se tiene Erlang, se tiene que bajar de esta página en la liga (despues la ponemos) el archivo comprimido en zip llamado (despues lo ponemos).
   # Se descomprimen los archivos y la carpeta se coloca en el lugar que el usuario más lo deseé.
   # Después abrimos el archivo llamado *server_config.dat* que se encuentra en la carpeta servidor adentro de nuestro proyecto.
