@@ -1,3 +1,4 @@
+#labels instalacion,windows
 # Instalación del Framework en el sistema operativo Windows
 
 == Instalación en Linux ==
