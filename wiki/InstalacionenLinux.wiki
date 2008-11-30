@@ -13,7 +13,7 @@ Teniendo un sistema operativo linux, la isntalación es muy sencilla.
 Pasos a seguir
   # Instalaciones necesarias: 
      * Erlang: El lenguaje de programacion Erlang se puede bajar de la siguiente liga http://www.erlang.org/ siguiendo los pasos ahi descritos.
-     * Eunit: Utilizado para las pruebas de unidad. Se recomienda bajar de la siguiente liga http://webcem01.cem.itesm.mx:8005/apps/s200813/tc2012/eunit.zip
+     * Eunit: Utilizado para las pruebas de unidad. Se recomienda bajar de la siguiente liga http://webcem01.cem.itesm.mx:8005/s200813/tc2012/eunit.zip
   # Descargar Erl-Flush:
      * Descarga el .zip con el framework de la siguiente liga http://erl-flush.googlecode.com/files/erl-flush.zip
      * Descomprime los archivos y coloca la carpeta en el lugar que desees (Se recomienda una lugar facil de accesar y recordar).
