@@ -1,0 +1,9 @@
+# Tutorial de como usar las funciones de erl-flush
+
+= Tutorial =
+
+Existen diferentes tipos de operadores que se pueden utilizar:
+
+   * '{{}}' -> expresiones
+   * '{%%}' -> condiciones 
+   * '{##}' -> comentarios
