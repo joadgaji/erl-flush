@@ -1,0 +1,10 @@
+#Tutorial para utilizar Erl-Flush.
+
+= Tutorial =
+
+==Instalación:==
+
+  * Windows: http://code.google.com/p/erl-flush/wiki/InstalacionenWindows
+  * Linux: http://code.google.com/p/erl-flush/wiki/InstalacionenLinux
+
+==Como uso==
