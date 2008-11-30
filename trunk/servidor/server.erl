@@ -26,9 +26,12 @@ loop(Socket) ->
 			[Metodo,Recurso|_] = string:tokens(Request, " "),
 			if
 				(Metodo == "GET")	and (Recurso == "/")->
-					ArchivoPagina = leerConfig(index),
-					{ok, Pagina} = file:read_file(ArchivoPagina),
-					gen_tcp:send(Socket, [io_lib:format(binary_to_list(Pagina), ["\r\n"])]);
+					ArchivoPagina = leerConfig(indexhead),
+					{ok, PaginaHead} = file:read_file(ArchivoPagina),
+					ArchivoIndex = leerConfig(index),
+					{ok, PaginaIndex}= file:read_file(ArchivoIndex),
+					HtmlPagina = binary_to_list(PaginaIndex),
+					gen_tcp:send(Socket, [io_lib:format(binary_to_list(PaginaHead), [HtmlPagina])]);
 				(Metodo == "GET") -> 
 					IndexPunto = string:str(Recurso,"."),
 					IndexDiagonal = string:str(string:substr(Recurso,2),"/"),
