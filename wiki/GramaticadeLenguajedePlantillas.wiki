@@ -16,7 +16,8 @@ Erl-Flush tiene tres diferentes tipos de operadores para poder realizar las tare
                     {{{
                     {{ variablemuylarga + 2 }} 
                     }}}
-              * El valor de una variable que no fue correctamente definida es false.
+              * El valor de una variable que no fue correctamente definida es _*false*_.
+
      * '{%%}' Ciclos y Condiciones ->
               * Se utilizan para poder realizar una iteración a lo largo de una lista o un diccionario. Ej.                  
                     {{{
