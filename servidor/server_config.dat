@@ -5,5 +5,6 @@
 {pagina405, "/home/adrian/erl-flush/servidor/pagina405.html"}.
 {pagina500, "/home/adrian/erl-flush/servidor/pagina500.html"}.
 {index, "/home/adrian/erl-flush/resources/index.html"}.
+{indexhead, "/home/adrian/erl-flush/servidor/indexhead.html"}.
 {controller_root , "/home/adrian/erl-flush/ctrl" }.
 {view_root, "/home/adrian/erl-flush/views/"}.
