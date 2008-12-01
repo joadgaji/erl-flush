@@ -1,10 +1,74 @@
 #Tutorial para utilizar Erl-Flush.
 
-= Tutorial =
+= TUTORIAL =
 
 ==Instalación:==
+
+Para instalar Erl-Flush dependiendo de tu sistema operativo debes seguir los sencillos pasos descritos en las siguientes ligas:
 
   * Windows: http://code.google.com/p/erl-flush/wiki/InstalacionenWindows
   * Linux: http://code.google.com/p/erl-flush/wiki/InstalacionenLinux
 
-==Como uso==
+==MVC==
+
+Erl-Flush esta basado en Modelo Vista Controlador, por lo que sus funciones estan modularizadas, asi que dentro del proyecto puedes encontrar las siguientes carpetas
+
+   erl-flush
+        * views.
+        * ctrl
+
+Esto permite separar los archivos que sirven como vista para la pagina, que son los que llevan el diseño, de los archivos que llevan la programación. Los primeros deben ser guardados en la carpeta _views_, mientras que los segundos son guardados en _ctrl_.
+
+==Views==
+
+¿Que se debe guardar en esta carpeta?
+
+La carpeta de views esta creada para poder guardar las vistas de la pagina, es donde ira el html, javascript, etc. que dará funcionalidad a ésta. A esta página puede ir agregada la gramatica propia de erl-flush, la cual sera usada en conjunto con un controlador.
+
+  * Ejemplo:
+
+     {{{
+     factorial.html
+
+     <html>
+	<body>
+		{{x}}
+		<br>
+		{{y}}
+	</body>
+     </html>
+
+     }}}
+     _*La anterior es una página de html sencilla en donde se desea imprimir el valor dinamico de "x" y "y"*_
+
+     ==Gramatica de Plantillas==
+     Erl-Flush maneja operadores diferentes para poder crear Comentarios, Expresiones, Ciclos y Condiciones. A continuación una referencia de como hacer uso de estos.
+          
+          ===Comentarios===
+*Operador* : _{# #}_
+
+     {{{
+<html>
+	<body>
+                {#Este es un comentario#}
+	</body>
+</html>
+
+     }}}
+_El codigo anterior muestra un comentario en una vista, que puede servir para describir o crear anotaciones, los comentarios no se mostrarán en el resultado de la vista, solo estarán en el source._
+
+          ===Expresiones===
+*Operador* : _{{ }}_
+
+          {{{
+<html>
+	<body>
+                {#Este es un comentario#}
+		{{x}}
+		<br>
+		{{y}}
+	</body>
+</html>
+
+     }}}
+_El codigo anterior muestra como se pueden mandar llamar variables_
