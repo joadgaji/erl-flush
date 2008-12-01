@@ -137,6 +137,7 @@ Los controladores se crean basandose en el lenguaje erlang.
   * Ejemplo:
 
      {{{
+      prueba.erl
      -module(prueba).
 -export([fact/2]).
 
@@ -147,5 +148,4 @@ factorial(0) ->	1;
 factorial(N) -> N * factorial(N-1).
 
      }}}
-     _*La anterior es una página de html sencilla en donde se desea imprimir el valor dinamico de "x" y "y"*_
-
+     _*El codigo anterior es un controlador llamado prueba.erl que realiza el factorial de cierto numero.*_
