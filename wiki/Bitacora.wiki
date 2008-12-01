@@ -32,7 +32,6 @@
 || 28-Nov-2008 || 2 hrs ||  Mary, Luna, Malto y Mamachuy  || -  || Esquelto de la aplicacion y edicion video.||
 || 28-Nov-2008 || 2 hrs ||  Mary, Luna, Malto y Mamachuy  || Periodo de examenes finales   || Esquelto de la aplicacion y edicion video.||
 || 30-Nov-2008 || 10 hrs ||  Mary, Luna, Malto y Mamachuy  || Periodo de examenes finales   || Detalles finales, edicion video, vistas y controladores de la aplicacion, corregir errores de la base de datos, turorial y aportaciones a la documentacion.||
-|| 1-Dic-2008 || 2 hrs ||  Mary, Luna, Malto y Mamachuy  || Periodo de examenes finales  || Detalles finales y edicion video.||
-
+|| 1-Dic-2008 || 6 hrs ||  Mary, Luna, Malto y Mamachuy  || Periodo de examenes finales|| Detalles finales y edicion video.||
 
 
