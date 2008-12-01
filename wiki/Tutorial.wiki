@@ -73,7 +73,7 @@ _El codigo anterior muestra un comentario en una vista, que puede servir para de
      }}}
 _El codigo anterior muestra como se pueden mandar llamar variables previamente definidas en el diccionario_
 
-          ===Expresiones===
+          ===Condiciones y Ciclos===
 *Operador* : _{% %}_
 
           {{{
@@ -93,7 +93,7 @@ _El codigo anterior muestra como se pueden mandar llamar variables previamente d
 _El codigo anterior muestra el uso de una condición if, en donde solo se imprime el valor de x (previamente cargado en el diccionario) si éste es mayor a 3_
 
         {{{
-          Ciclos
+          Ciclos listas
 <html>
 	<body>
               {#Este es un comentario#}
@@ -109,7 +109,7 @@ _El codigo anterior muestra el uso de una condición if, en donde solo se imprim
 _El codigo anterior muestra el uso de un ciclo for, en donde se recorre la lista "rango" y se imprimen sus valores._
 
         {{{
-          Condicion
+          Ciclos diccionarios
 <html>
 	<body>
               {#Este es un comentario#}
@@ -125,3 +125,27 @@ _El codigo anterior muestra el uso de un ciclo for, en donde se recorre la lista
 
      }}}
 _El codigo anterior muestra el uso de un ciclo for, en donde se recorre el diccionario "rangodetuplas" y se imprimen sus valores (key, value) _
+
+==Ctrl==
+
+¿Que se debe guardar en esta carpeta?
+
+La carpeta de ctrl esta creada para poder guardar llos cotroladores de la página, es donde ira codigo que más que diseño le brinda funcionalidad a la pagina.
+
+Los controladores se crean basandose en el lenguaje erlang.
+
+  * Ejemplo:
+
+     {{{
+     -module(prueba).
+-export([fact/2]).
+
+factorial(Params,_)-> 
+	{[{A,factorial(list_to_integer(B))}||{A,B}<-Params],[{"Server", "Erl-flush"},{"Content-type", "text/plain"}]}.
+
+factorial(0) ->	1;
+factorial(N) -> N * factorial(N-1).
+
+     }}}
+     _*La anterior es una página de html sencilla en donde se desea imprimir el valor dinamico de "x" y "y"*_
+
