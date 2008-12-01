@@ -71,4 +71,57 @@ _El codigo anterior muestra un comentario en una vista, que puede servir para de
 </html>
 
      }}}
-_El codigo anterior muestra como se pueden mandar llamar variables_
+_El codigo anterior muestra como se pueden mandar llamar variables previamente definidas en el diccionario_
+
+          ===Expresiones===
+*Operador* : _{% %}_
+
+          {{{
+          Condicion
+<html>
+	<body>
+              {#Este es un comentario#}
+	      {% if x > 3 %}
+                 {{x}}
+              {% endif %}
+              <br>
+	      {{y}}
+	</body>
+</html>
+
+     }}}
+_El codigo anterior muestra el uso de una condición if, en donde solo se imprime el valor de x (previamente cargado en el diccionario) si éste es mayor a 3_
+
+        {{{
+          Ciclos
+<html>
+	<body>
+              {#Este es un comentario#}
+	      {% for i in rango %}
+                 {{i}}
+              {% endfor %}
+              <br>
+	      {{y}}
+	</body>
+</html>
+
+     }}}
+_El codigo anterior muestra el uso de un ciclo for, en donde se recorre la lista "rango" y se imprimen sus valores._
+
+        {{{
+          Condicion
+<html>
+	<body>
+              {#Este es un comentario#}
+	      {% for i,j in rangodetuplas %}
+                 {{i}}
+                 <br>
+                 {{j}}
+              {% endfor %}
+              <br>
+	      {{y}}
+	</body>
+</html>
+
+     }}}
+_El codigo anterior muestra el uso de un ciclo for, en donde se recorre el diccionario "rangodetuplas" y se imprimen sus valores (key, value) _
