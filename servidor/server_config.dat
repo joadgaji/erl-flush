@@ -1,4 +1,4 @@
-{port, 8800}.
+{port, 8080}.
 {root, "/home/adrian/erl-flush/resources"}.
 {pagina200, "/home/adrian/erl-flush/servidor/pagina200.html"}.
 {pagina404, "/home/adrian/erl-flush/servidor/pagina404.html"}.
